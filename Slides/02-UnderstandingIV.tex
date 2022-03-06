@@ -181,24 +181,170 @@
 
 \subsection{Just-Identified IV}
 \begin{frame}{Just-Identified IV}
-Stuff about just-identified IV
+\begin{itemize}
+\item As you likely know, the general \emph{ivregress} command (or its equivalent in R) allows for controls and multiple treatments / instruments\smallskip
+\begin{itemize}
+\item When \# treatment = \# instruments, we say the IV is ``just-identified'':
+\end{itemize}\pause{}\vspace{-0.3cm}
+\begin{align*}
+Y_i &=  \beta D_i +\mathbf{W}_i^\prime\boldsymbol{\gamma} +  \varepsilon_i\hspace{0.2cm}\text{(second stage)}\\
+X_i &= \pi Z_i + \mathbf{W}_i^\prime\boldsymbol{\mu} + \eta_i\hspace{0.2cm}\text{(first stage)}
+\end{align*}
+where $\mathbf{W}_i$ includes a constant.\pause{} Reduced form: $Y_i= \rho Z_i + \mathbf{W}_i^\prime\boldsymbol{\kappa}+\nu_i $\pause{}\vspace{0.3cm}
+\item Same identification logic as before:
+\smallskip
+\begin{itemize}
+\item Validity: $Cov(Z_i,\varepsilon_i)=0$, allowing $Cov(Z_i,\mathbf{W}_i)\neq 0$\pause{}\smallskip
+\item Relevance: $\pi\neq 0$, so $Z_i$ and $D_i$ are correlated controlling for $\mathbf{W}_i$
+\end{itemize}\pause{}\medskip
+\item IV is still "reduced form over first stage'': ($\beta=\rho/\pi$)\pause{}\vspace{0.1cm}
+\begin{itemize}
+\item Can use Frisch-Waugh-Lovell to ``partial out'' $\mathbf{W}_i$ from $Y_i$, $X_i$, $D_i$, \\ and so get back to an IV regression without controls
+\end{itemize}
+\end{itemize}
 \end{frame}
 
 \subsection{Overidentification}
 \begin{frame}{Overidentification}
-Stuff about overidentification
+\begin{itemize}
+\item Sometimes we have more than one instrument $Z_{i\ell}$, for $\ell=1,\dots,L$
+\smallskip
+\begin{itemize}\pause{}
+\item This leads to an ``overidentified'' IV regression:
+\end{itemize}
+\vspace{-0.3cm}
+\begin{align*}
+Y_i &=  \beta D_i +\mathbf{W}_i^\prime\boldsymbol{\gamma} +  \varepsilon_i\hspace{0.2cm}\text{(second stage)}\\
+X_i &= \mathbf{Z}_i^\prime\boldsymbol{\pi} + \mathbf{W}_i^\prime\boldsymbol{\mu} + \eta_i\hspace{0.2cm}\text{(first stage)}
+\end{align*}
+where $\mathbf{Z}_i=[Z_{i1},\dots,Z_{iL}]^\prime$. Reduced form: $Y_i= \mathbf{Z}_i^\prime\boldsymbol{\rho} + \mathbf{W}_i^\prime\boldsymbol{\kappa}+\nu_i $\pause{}\medskip
+
+\item Validity: $Cov(Z_{i\ell},\varepsilon_i)=0$ for all $\ell$\smallskip
+\begin{itemize}
+\item ``Overidentified'' because we could use any $Z_{i\ell}$ to estimate $\beta=\boldsymbol{\rho}_\ell/\boldsymbol{\pi}_\ell$\pause{}\smallskip
+\item Relevance: $\boldsymbol{\pi}_\ell\neq 0$ for at least some $\ell$
+\end{itemize}\pause{}\medskip
+
+\item Overidentification can yield tests of IV validity\smallskip
+\begin{itemize}
+\item Intuitively, 2SLS checks whether all the $Z_{i\ell}$ yields the same IV estimate, which is sensible in a constant-effects model...
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Putting the ``2S'' in ``2SLS''}
+\begin{itemize}
+\item You'll notice I haven't actually defined 2SLS beyond the simple case\smallskip
+\begin{itemize}
+\item Before we had $\beta^{IV}=\frac{Cov(Z_i,Y_i)}{Cov(Z_i,D_i)}$ leading to $\widehat\beta^{IV}=\frac{\widehat{Cov}(Z_i,Y_i)}{\widehat{Cov}(Z_i,D_i)}$ 
+\item General form follows similarly (sample analog), but is notation-heavy
+\end{itemize}
+\bigskip\pause{}
+\item A more useful way to define 2SLS is by a two-step procedure:\smallskip
+\begin{itemize}
+\item First regress $D_i$ on all $Z_{i\ell}$ and $W_{ik}$\smallskip
+\item Then regress $Y_i$ on the ``fitted values'' $\widehat{D}_i$ and controls $W_{ik}$ 
+\end{itemize}\bigskip\pause{}
+\item The proof of this follows from some (simple) linear algebra \smallskip
+\begin{itemize}
+\item Intuitively, regressing $Y_i$ on $\widehat{\pi}^{OLS}Z_i$ gives a scaled RF: $\widehat\beta^{IV}=\frac{\widehat{\rho}^{OLS}}{\widehat{\pi}^{OLS}}$
+\end{itemize}\bigskip\pause{}
+\item Although easy, you should never do such ``manual 2SLS'' yourself!\smallskip
+\begin{itemize}
+\item Your point estimates will be right, but your SEs won't be!
+\end{itemize}
+\end{itemize}
 \end{frame}
 
 \section{Weak and Many Instruments}
 
 \subsection{Weak IV}
-\begin{frame}{Weak IV}
-Stuff about weak IV
+\begin{frame}{Weak Instruments}
+\begin{itemize}
+\item When running just-identified IV, you should always worry about the ``strength'' of your instrument\smallskip
+\begin{itemize}
+\item Specifically the first stage ``F-statistic,'' which tests $\pi^{OLS}=0$ 
+\end{itemize}\bigskip\pause{}
+\item If $\pi^{OLS}$ is small relative to its standard error, the IV is ``weak''\smallskip
+\begin{itemize}
+\item Typically use the rule-of-thumb of $F<10$ (Staiger and Stock 1997)\smallskip
+\item In this case the second-stage SEs will be large and the 2SLS estimate will tend to be biased towards the corresponding OLS estimate
+\end{itemize}\bigskip\pause{}
+\item Much made of this over the years, but Angrist and Koles\'{a}r (2022) argue recently that we shouldn't worry too much\smallskip
+\begin{itemize}
+\item The SE increase tends to be large enough to ``cover up'' the bias\smallskip
+\item Just-id. 2SLS is ``approximately median-unbiased'' (as it is LIML)
+\end{itemize}
+\end{itemize}
 \end{frame}
+
+\begin{frame}{Weak Instruments: Visualized}
+Monte Carlo: $Y_i=\varepsilon_i$, $D_i=\Pi Z_i+\eta_i$: $\Pi=Var(\varepsilon_i)=Var(\eta_i)=1$
+\begin{center}
+\includegraphics[scale=0.45]{./lecture_includes/strongpi.png}
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Weak Instruments: Visualized}
+Monte Carlo: $Y_i=\varepsilon_i$, $D_i=\Pi Z_i+\eta_i$: $\Pi=0.1$ (Weaker)
+\begin{center}
+\includegraphics[scale=0.35]{./lecture_includes/medpi.png}
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Weak Instruments: Visualized}
+Monte Carlo: $Y_i=\varepsilon_i$, $D_i=\Pi Z_i+\eta_i$: $\Pi=0.01$ (Very Weak)
+\begin{center}
+\includegraphics[scale=0.35]{./lecture_includes/weakpi.png}
+\end{center}
+
+\end{frame}
+
 
 \subsection{Many IVs}
 \begin{frame}{Many IVs}
-Stuff about many IVs
+\begin{itemize}
+\item A more pernicious problem is many-instrument bias, when overid\smallskip
+\begin{itemize}
+\item Also tends to manifest in low first-stage F's, so also good to check
+\end{itemize}\bigskip\pause{}
+\item Many-IV bias is also towards OLS, but unlike before SEs go \emph{down}\smallskip
+\begin{itemize}
+\item Intuitively, a more flexible FS tends to fit $D_i$ better $\rightarrow$ more power\smallskip
+\item But we can have \emph{overfitting} with lots of $Z_i$ $\rightarrow$ essentially recreate $D_i$
+\end{itemize}\bigskip\pause{}
+\item As we'll see, this bias is especially relevant in judge IV designs\smallskip
+\begin{itemize}
+\item Potentially many judge assignment indicators as the instrument\smallskip
+\item Leave-out corrections (e.g. Angrist et al. 1999) have been adapted to this setting in recent years (e.g. Koles\'{a}r 2013)
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Weak and Many Instruments VIII}
+Monte Carlo: $Y_i=\varepsilon_i$, $X_i=\Pi Z_{i1}+\eta_i$: IV with one $Z_{i1}$
+\begin{center}
+\includegraphics[scale=0.35]{./lecture_includes/fewz.png}
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Weak and Many Instruments IX}
+Monte Carlo: $Y_i=\varepsilon_i$, $X_i=\Pi Z_{i1}+\eta_i$: IV with ten $Z_{ij}$
+\begin{center}
+\includegraphics[scale=0.35]{./lecture_includes/somez.png}
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Weak and Many Instruments X}
+Monte Carlo: $Y_i=\varepsilon_i$, $X_i=\Pi Z_{i1}+\eta_i$: IV with 100 $Z_{ij}$
+\begin{center}
+\includegraphics[scale=0.35]{./lecture_includes/manyz.png}
+\end{center}
+
 \end{frame}
 
 \end{document}

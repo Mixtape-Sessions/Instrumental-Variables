@@ -31,11 +31,11 @@ Instrumental variables (IV) is a powerful tool for leveraging external (“exoge
 
 <b>About</b>
 
-... 
+This section introduces the problems with endogenous variables in OLS regression and the potential to overcome this problem with the instrumental variables strategy. 
 
 <b>Slides</b>
 
-... 
+<a href="https://raw.githubusercontent.com/Mixtape-Sessions/Instrumental-Variables/main/Slides/01-Introduction.pdf">Introduction</a>
 
 <b>Code</b>
 
@@ -43,7 +43,11 @@ Instrumental variables (IV) is a powerful tool for leveraging external (“exoge
 
 <b>Readings</b>
 
-... 
+<a href="https://raw.githubusercontent.com/Mixtape-Sessions/Instrumental-Variables/main/Readings/Lecture1/Angrist_1990.pdf">Angrist (1990)</a>
+
+<a href="https://raw.githubusercontent.com/Mixtape-Sessions/Instrumental-Variables/main/Readings/Lecture1/MHE_IV_excerpt.pdf">Mostly Harmless Economics (excerpt)</a>
+
+<a href="https://raw.githubusercontent.com/Mixtape-Sessions/Instrumental-Variables/main/Readings/Lecture1/PH1630_Chapter8_Notes.pdf">My Lecture Notes</a>
 
 </details><br />
 

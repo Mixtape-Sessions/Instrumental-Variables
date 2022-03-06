@@ -8,7 +8,6 @@ library(data.table) # For working with data
 library(fixest) # For regressions
 library(binsreg) # For binscatter
 library(ggplot2)
-library(skimr) # For summary
 
 ## Load data
 # data <- haven::read_dta("https://github.com/Mixtape-Sessions/Instrumental-Variables/blob/main/Exercises/Exercise1/angrist_krueger_91.dta?raw=true")

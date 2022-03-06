@@ -33,12 +33,12 @@
 \begin{itemize}
 \item Far from comprehensive; stay tuned for more ``mixtape tracks'' that take deeper dives on particular topics (judge IV, etc)\smallskip
 \item Emphasis on \emph{practical}: IV is meant to be used, not just studied!
-\end{itemize}\pause{}\smallskip
+\end{itemize}\pause{}\medskip
 \item Four one-hour lectures: from IV basics to recent topics\pause{}
 \begin{itemize}
 \item Please ask questions in the Discord chat!\smallskip
 \item I will try to stick to the schedule but may improvise slightly
-\end{itemize}\pause{}\smallskip
+\end{itemize}\pause{}\medskip
 \item Two 75-minute coding labs, applying what we've learned\pause{}\smallskip
 \begin{itemize}
 \item I will be live-coding in Stata, but R code will also be available\smallskip
@@ -62,12 +62,12 @@
 \item E.g. a structural supply/demand model or potential outcomes\smallskip
 \item They set the target for an empirical analysis: what we want to know
 \end{itemize}\pause{}\smallskip
-\item \emph{Estimands} are functions of the distribution of observable data\pause{}\smallskip
+\item \emph{Estimands} are functions of the distribution of observable data\smallskip
 \begin{itemize}
 \item E.g. a difference in means or ratio of population regression coef's\smallskip
 \item Make assumptions to link parameters \& estimands (``identification'')
 \end{itemize}\pause{}\smallskip
-\item \emph{Estimators} are functions of the observed data itself (the ``sample'')\pause{}\smallskip
+\item \emph{Estimators} are functions of the observed data itself (the ``sample'')\smallskip
 \begin{itemize}
 \item E.g. a difference in sample means or ratio of OLS coefficients\smallskip 
 \item Since data are random, so are estimators. Each has a distribution\smallskip
@@ -86,7 +86,7 @@ This course will mostly focus on identification, but we'll cover some IV estimat
 \end{frame}
 
 \subsection{Regression Identification and Endogeneity}
-\begin{frame}{Regression Identification and Endogeneity}
+\begin{frame}{Let's Get Concrete}
 \begin{itemize}
 \item Human capital theory (e.g. Becker, 1957) tells us that taking one-day IV intensives are likely to boost later-life productivity\pause{}\smallskip
 \begin{itemize}
@@ -170,7 +170,7 @@ This course will mostly focus on identification, but we'll cover some IV estimat
 \begin{itemize}
 \item Affects $D_i$, so relevant to the ``treatment'' of interest\smallskip
 \item Randomly assigned, so unconfounded by selection (unlike $D_i$)
-\end{itemize}\medskip
+\end{itemize}\medskip\pause{}
 \item Indeed, this leads us to IV estimands (and estimators)
 \end{itemize}
 \end{frame}
@@ -204,7 +204,7 @@ Cov(Z_i,Y_i)&=Cov(Z_i,\alpha+\beta D_i+\varepsilon_i)=\beta Cov(Z_i,D_i)+Cov(Z_i
 \end{align*}\pause{}\vspace{-0.3cm}
 \item This $\beta^{IV}=\frac{Cov(Z_i,Y_i)}{Cov(Z_i,D_i)}$ is the (simple) IV \emph{estimand}\smallskip\pause{}
 \begin{itemize}
-\item Compare to the OLS estimand here: $\beta^{OLS}=\frac{Cov(D_i,Y_i)}{Var(D_i)}$ 
+\item Compare to the OLS estimand: $\beta^{OLS}=\frac{Cov(D_i,Y_i)}{Var(D_i)}$ 
 \end{itemize}
 \end{itemize}
 \end{frame}
@@ -219,7 +219,7 @@ where $\rho^{OLS}$ and $\pi^{OLS}$ are two OLS coefficients:\pause{}
 \begin{align*}
 Y_i &= \kappa^{OLS} + \rho^{OLS} Z_i + V_i \hspace{0.2cm}\text{ ``reduced form''}\\
 D_i &= \mu^{OLS} + \pi^{OLS} Z_i + W_i\hspace{0.2cm}\text{ ``first stage''}
-\end{align*}
+\end{align*}\vspace{-0.5cm}\pause{}
 \item Sometimes we refer to the IV estimand as the ``second stage'':
 \begin{align*}
 Y_i=\alpha^{IV}+\beta^{IV}D_i+ U_i
@@ -236,7 +236,7 @@ where now $Cov(Z_i,U_i)=0$. Thus ``IV=RF/FS'' ($\beta^{IV}=\rho^{OLS}/\pi^{OLS}$
 \widehat\beta^{IV}=\frac{\widehat{Cov}(Z_i,Y_i)}{\widehat{Cov}(Z_i,D_i)}=\frac{\widehat\rho^{OLS}}{\widehat\pi^{OLS}}
 \end{align*}
 where $\widehat{Cov}(X_i,W_i)=\frac{1}{N}\sum_i X_iW_i-\left(\frac{1}{N}\sum_i X_i\right)\left(\frac{1}{N}\sum_i W_i\right)$,\\ $\hat\rho^{OLS}=\widehat{Cov}(Z_i,Y_i)/\widehat{Var}(Z_i)$ and $\hat\pi^{OLS}=\widehat{Cov}(Z_i,D_i)/\widehat{Var}(Z_i)$\smallskip
-\begin{itemize}
+\begin{itemize}\pause{}
 \item This is what Stata does when you type ``ivreg2 y (d=z), r''\smallskip
 \item Standard errors come from the usual large-sample asymptotics
 \end{itemize}\bigskip\pause{}
@@ -265,6 +265,15 @@ where $\widehat{Cov}(X_i,W_i)=\frac{1}{N}\sum_i X_iW_i-\left(\frac{1}{N}\sum_i X
 \vspace{-0.7cm}
 \begin{center}
 \includegraphics[scale=0.55]{./lecture_includes/angrist_1990.png}
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Draft Lottery Reduced Form and First Stage Visualized}
+
+\vspace{-0.45cm}
+\begin{center}
+\includegraphics[scale=0.5]{./lecture_includes/angrist_1990_2.png}
 \end{center}
 
 \end{frame}

@@ -11,41 +11,261 @@
 \section{Introductions}
 
 \subsection{Who Am I?}
+\subsection{Who Am I?}
 \begin{frame}{Who Am I?}
-Stuff about me
+\begin{itemize}
+\item Groos Family Assistant Professor of Economics, Brown University\pause{}\smallskip
+\item A big fan of instrumental variable (IV) methods\pause{}
+\begin{itemize}
+\item Lottery- and non-lottery IVs in studies of educational quality \\ {\scriptsize \textcolor{red!75!green!50!blue!25!gray}{(Angrist et al. 2016, 2017, 2021, 2022; Abdulkadiro\u{g}lu et al. 2016)}}
+\item Quasi-experimental evaluations of healthcare quality \\ {\scriptsize \textcolor{red!75!green!50!blue!25!gray}{(Hull 2020; Abaluck et al. 2021, 2022)}}
+\item IV-based analyses of discrimination and bias \\ {\scriptsize \textcolor{red!75!green!50!blue!25!gray}{(Arnold et al. 2020, 2021, 2022; Hull 2021; Bohren et al. 2022)}}
+\item Shift-share instruments and related designs \\ {\scriptsize \textcolor{red!75!green!50!blue!25!gray}{(Borusyak et al. 2022; Borusyak and Hull 2021, 2022; Goldsmith-Pinkham et al. 2022)}}
+\end{itemize}\pause{}\smallskip
+\item A constant student of IV (and econometrics more generally)
+\end{itemize}
 \end{frame}
 
 \subsection{What is This Course?}
 \begin{frame}{What is This Course?}
-Stuff about this course
+\begin{itemize}
+\item A one-day intensive on IV, with focus on recent practical advances \pause{}\smallskip
+\begin{itemize}
+\item Far from comprehensive; stay tuned for more ``mixtape tracks'' that take deeper dives on particular topics (judge IV, etc)\smallskip
+\item Emphasis on \emph{practical}: IV is meant to be used, not just studied!
+\end{itemize}\pause{}\smallskip
+\item Four one-hour lectures: from IV basics to recent topics\pause{}
+\begin{itemize}
+\item Please ask questions in the Discord chat!\smallskip
+\item I will try to stick to the schedule but may improvise slightly
+\end{itemize}\pause{}\smallskip
+\item Two 75-minute coding labs, applying what we've learned\pause{}\smallskip
+\begin{itemize}
+\item I will be live-coding in Stata, but R code will also be available\smallskip
+\item Goal: demonstrate both methods \& how I think about applying them
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Schedule}
+\includegraphics[scale=0.55]{./lecture_includes/schedule.png}
 \end{frame}
 
 \section{Regression Review}
 
 \subsection{Models vs. Estimands vs. Estimators}
 \begin{frame}{Models vs. Estimands vs. Estimators}
-Stuff about models vs. estimands vs. estimators
+\begin{itemize}
+\item Three distinct objects (though not always clearly distinguished) \pause{}\smallskip
+\item \emph{Parameters} come from models of how observed data are generated\smallskip
+\begin{itemize}
+\item E.g. a structural supply/demand model or potential outcomes\smallskip
+\item They set the target for an empirical analysis: what we want to know
+\end{itemize}\pause{}\smallskip
+\item \emph{Estimands} are functions of the distribution of observable data\pause{}\smallskip
+\begin{itemize}
+\item E.g. a difference in means or ratio of population regression coef's\smallskip
+\item Make assumptions to link parameters \& estimands (``identification'')
+\end{itemize}\pause{}\smallskip
+\item \emph{Estimators} are functions of the observed data itself (the ``sample'')\pause{}\smallskip
+\begin{itemize}
+\item E.g. a difference in sample means or ratio of OLS coefficients\smallskip 
+\item Since data are random, so are estimators. Each has a distribution\smallskip
+\item Use knowledge of estimator distributions to make learn about estimands (``inference'') and---hopefully---identified parameters
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Identification vs. Estimation}
+\smallskip
+
+\includegraphics[scale=0.37]{./lecture_includes/BigPicture.png}
+\medskip
+
+This course will mostly focus on identification, but we'll cover some IV estimation / inference issues as well
 \end{frame}
 
 \subsection{Regression Identification and Endogeneity}
 \begin{frame}{Regression Identification and Endogeneity}
-Stuff about regression identification
+\begin{itemize}
+\item Human capital theory (e.g. Becker, 1957) tells us that taking one-day IV intensives are likely to boost later-life productivity\pause{}\smallskip
+\begin{itemize}
+\item Parameter: returns to taking this class $\beta$, measured in some outcome $Y_i$ (e.g. lifetime top-5 pubs / earnings / twitter followers)\smallskip
+\item Simple causal/structural model: $Y_i=\alpha+\beta D_i + \varepsilon_i$, where $D_i\in\{0,1\}$ indicates taking this class
+\end{itemize}\pause\smallskip
+\item We see a sample of $Y_i$, $D_i$, and some other covariates $W_{1i},\dots,W_{Ki}$\smallskip
+\begin{itemize}
+\item We fire up Stata and \emph{reg y d w1-wk, r}. How do we interpret the output?
+\end{itemize}\pause{}\medskip
+\item The OLS \emph{estimator} $\widehat{\beta}^{OLS}$ consistently estimates the regression \emph{estimand} $\beta^{OLS}$ under relatively weak conditions (e.g. \emph{i.i.d.} data)\smallskip
+\begin{itemize}
+\item Stata tells us $\widehat{\beta}^{OLS}$ and what we can infer about $\beta^{OLS}$ from it\smallskip
+\item It \emph{doesn't} directly tell us about the relationship between $\beta^{OLS}$ and $\beta$
+\end{itemize}
+\end{itemize}
 \end{frame}
 
-\begin{frame}
-Stuff about endogeneity
+\begin{frame}{Population Regression}
+\begin{itemize}
+\item \emph{Def.:} the population regression of $Y_i$ on $\mathbf{X}_i=[1,D_i,W_{1i},\dots,W_{Ki}]^\prime$ is given by $Y_i=\mathbf{X}_i^\prime\boldsymbol{\beta}^{OLS}+U_i$ where $E[\mathbf{X}_i U_i]=0$\smallskip\pause{}
+\begin{itemize}
+\item Equivalently, $\boldsymbol{\beta}^{OLS}=E[\mathbf{X}_i\mathbf{X}_i^\prime]^{-1}E[\mathbf{X}_iY_i]$ and $U_i=Y_i-\mathbf{X}_i^\prime\boldsymbol{\beta}^{OLS}$\smallskip
+\item $\boldsymbol{\beta}^{OLS}$ contains regression \emph{coefficients}; $U_i$ is the regression \emph{residual}  
+\end{itemize}\medskip\pause{}
+\item Key point: we can always define $\boldsymbol{\beta}^{OLS}$ for any $Y_i$ and $\mathbf{X}_i$ (assuming no perfect collinearity); this is what Stata estimates\smallskip
+\begin{itemize}
+\item Specifically it computes $\widehat{\boldsymbol{\beta}}^{OLS}=(\frac{1}{N}\sum_i\mathbf{X}_i\mathbf{X}_i^\prime)^{-1}(\frac{1}{N}\sum_i\mathbf{X}_iY_i)$ and uses large-sample asymptotics (LLN/CLT) to get a standard error
+\end{itemize}\pause{}\medskip
+\item But what if this \emph{estimand} is not what we want? \smallskip\pause{}
+\begin{itemize}
+\item What if $\boldsymbol{\beta}^{OLS}$ fails to coincide with our economic parameter of interest (e.g. returns to mixtape workshops)?
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}{You Can't Always Get What you Want...}
+\begin{itemize}
+\item The model parameter in $Y_i=\alpha+\beta D_i+\varepsilon_i$ need not coincide with the regression coefficient in $Y_i=\alpha^{OLS}+\beta^{OLS} D_i+U_i$\smallskip
+\begin{itemize}
+\item I.e. we may not have $Cov(D_i,\varepsilon_i)=0$ (always have $Cov(D_i,U_i)=0)$
+\end{itemize}\bigskip\pause{}
+\item Selection bias (a.k.a. omitted variables bias): students with higher latent earnings potential $\varepsilon_i$ are more likely to take this class $D_i$\smallskip
+\begin{itemize}
+\item $Cov(D_i,\varepsilon_i)>0$ means $\beta^{OLS}>\beta$: overstate the returns-to-mixtape
+\end{itemize}\bigskip\pause{}
+\item Adding more controls (e.g. demographics) may or may not help\smallskip
+\begin{itemize}
+\item Projecting $\varepsilon_i$ on $X_i$, we get $Y_i=\alpha+\beta D_i+\gamma X_i+\tilde\varepsilon_i$, $Cov(X_i,\tilde\varepsilon_i)=0$\smallskip
+\item Whether or not $Cov(D_i,\tilde\varepsilon_i)=0$ depends on whether $X_i$ sufficiently accounts for the confounding relationship $Cov(D_i,\varepsilon_i)\neq 0$
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Regression ``Exogeneity''}
+
+\begin{center}
+\includegraphics[scale=0.8]{./lecture_includes/dag1.png}
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Regression ``Endogeneity''}
+
+\begin{center}
+\includegraphics[scale=0.8]{./lecture_includes/dag2.png}
+\end{center}
+
+\end{frame}
+
+\begin{frame}{...But Sometimes, You Get What you Need}
+\begin{itemize}
+\item Imagine this course was ``oversubscribed,'' and admission was determined by lottery\smallskip
+\begin{itemize}
+\item Among those interested in taking the course, a random sample denoted by $Z_i=1$ was given access\smallskip
+\item The rest, with $Z_i=0$ not initially given access (maybe got in later)
+\end{itemize}\medskip\pause{}
+\item Intuitively, this external shock $Z_i$ should be helpful for identifying $\beta$\smallskip
+\begin{itemize}
+\item Affects $D_i$, so relevant to the ``treatment'' of interest\smallskip
+\item Randomly assigned, so unconfounded by selection (unlike $D_i$)
+\end{itemize}\medskip
+\item Indeed, this leads us to IV estimands (and estimators)
+\end{itemize}
+\end{frame}
+
+\begin{frame}{The IV Solution}
+
+\begin{center}
+\includegraphics[scale=0.8]{./lecture_includes/dag3.png}
+\end{center}
+
 \end{frame}
 
 \section{Intro to IV}
 
 \subsection{Instrument Validity and Relevance}
 \begin{frame}{Instrument Validity and Relevance}
-Stuff about validity and relevance
+\begin{itemize}
+\item Causal/structural model $Y_i=\alpha+\beta D_i+\varepsilon_i$ and a candidate IV $Z_i$ \smallskip
+\begin{itemize}
+\item Single $D_i$ and $Z_i$ and no further controls, for now
+\end{itemize}\medskip\pause{}
+\item Two key assumptions:\smallskip
+\begin{itemize}
+\item Relevance: $Z_i$ and $D_i$ are correlated: $Cov(Z_i,D_i)\neq 0$ \smallskip
+\item Validity: $Z_i$ and $\varepsilon_i$ are \emph{un}correlated: $Cov(Z_i,\varepsilon_i)=0$
+\end{itemize}\medskip\pause{}
+\item We then have identification:\vspace{-0.3cm}
+\begin{align*}
+Cov(Z_i,Y_i)&=Cov(Z_i,\alpha+\beta D_i+\varepsilon_i)=\beta Cov(Z_i,D_i)+Cov(Z_i,\varepsilon_i)\\
+&=\beta Cov(Z_i,D_i)\text{, Implying $\beta=\frac{Cov(Z_i,Y_i)}{Cov(Z_i,D_i)}$}
+\end{align*}\pause{}\vspace{-0.3cm}
+\item This $\beta^{IV}=\frac{Cov(Z_i,Y_i)}{Cov(Z_i,D_i)}$ is the (simple) IV \emph{estimand}\smallskip\pause{}
+\begin{itemize}
+\item Compare to the OLS estimand here: $\beta^{OLS}=\frac{Cov(D_i,Y_i)}{Var(D_i)}$ 
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{``Reduced Form'' and ``First Stage''}
+\begin{itemize}
+\item Note we can write 
+\begin{align*}
+\beta^{IV}=\frac{Cov(Z_i,Y_i)}{Cov(Z_i,D_i)}=\frac{Cov(Z_i,Y_i)/Var(Z_i)}{Cov(Z_i,D_i)/Var(Z_i)}=\frac{\rho^{OLS}}{\pi^{OLS}}
+\end{align*}
+where $\rho^{OLS}$ and $\pi^{OLS}$ are two OLS coefficients:\pause{}
+\begin{align*}
+Y_i &= \kappa^{OLS} + \rho^{OLS} Z_i + V_i \hspace{0.2cm}\text{ ``reduced form''}\\
+D_i &= \mu^{OLS} + \pi^{OLS} Z_i + W_i\hspace{0.2cm}\text{ ``first stage''}
+\end{align*}
+\item Sometimes we refer to the IV estimand as the ``second stage'':
+\begin{align*}
+Y_i=\alpha^{IV}+\beta^{IV}D_i+ U_i
+\end{align*}
+where now $Cov(Z_i,U_i)=0$. Thus ``IV=RF/FS'' ($\beta^{IV}=\rho^{OLS}/\pi^{OLS}$)
+\end{itemize}
 \end{frame}
 
 \subsection{The 2SLS Estimator}
 \begin{frame}{The 2SLS Estimator}
-Stuff about 2SLS
+\begin{itemize}
+\item As with OLS, we estimate IV by sample analog:
+\begin{align*}
+\widehat\beta^{IV}=\frac{\widehat{Cov}(Z_i,Y_i)}{\widehat{Cov}(Z_i,D_i)}=\frac{\widehat\rho^{OLS}}{\widehat\pi^{OLS}}
+\end{align*}
+where $\widehat{Cov}(X_i,W_i)=\frac{1}{N}\sum_i X_iW_i-\left(\frac{1}{N}\sum_i X_i\right)\left(\frac{1}{N}\sum_i W_i\right)$,\\ $\hat\rho^{OLS}=\widehat{Cov}(Z_i,Y_i)/\widehat{Var}(Z_i)$ and $\hat\pi^{OLS}=\widehat{Cov}(Z_i,D_i)/\widehat{Var}(Z_i)$\smallskip
+\begin{itemize}
+\item This is what Stata does when you type ``ivreg2 y (d=z), r''\smallskip
+\item Standard errors come from the usual large-sample asymptotics
+\end{itemize}\bigskip\pause{}
+\item We will soon consider extensions of all of this, with controls / multiple instruments / etc
+\end{itemize}
+
 \end{frame}
 
+\begin{frame}{Angrist (1990): The ``Draft Lottery Paper''}
+\begin{itemize}
+\item Angrist famously used Vietnam-era draft eligibility as an instrument to estimate the earnings effects of military service \smallskip
+\begin{itemize}
+\item Let $Z_i$ be an indicator for draft eligibility, $D_i$ be an indicator for military service, and $Y_i$ measure later-life earnings
+\end{itemize}\medskip\pause{}
+\item Here $\beta^{IV}=\frac{Cov(Z_i,Y_i)/Var(Z_i)}{Cov(Z_i,D_i)/Var(Z_i)}=\frac{E[Y_i\mid Z_i=1]-E[Y_i\mid Z_i=0]}{E[D_i\mid Z_i=1]-E[D_i\mid Z_i=0]}$ has a special name, because $Z_i$ is binary: the \emph{Wald estimand}\smallskip
+\begin{itemize}
+\item First stage $E[D_i\mid Z_i=1]-E[D_i\mid Z_i=0]$: effect of eligibility on the \emph{probability} of military service (b/c $D_i$ is binary)\smallskip
+\item Reduced form $E[Y_i\mid Z_i=1]-E[Y_i\mid Z_i=0]$: effect of eligibility on adult earnings (measured in 1971, 1981...)
+\end{itemize}\medskip\pause{}
+\item IV interprets the latter causal effect in terms of the former
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Draft Lottery Reduced Form, First Stage, and IV}
+
+\vspace{-0.7cm}
+\begin{center}
+\includegraphics[scale=0.55]{./lecture_includes/angrist_1990.png}
+\end{center}
+
+\end{frame}
 \end{document}

@@ -104,11 +104,11 @@
 \end{frame}
 
 \subsection{Natural Experiments}
-\begin{frame}{Natural Experiments}
+\begin{frame}{Where do IVs Come From? 2) Natural Experiments}
 \begin{itemize}
 \item Without appealing to literal randomization, we may credibly argue $Z_i$ is as-good-as-randomly assigned conditional on some $\mathbf{W}_i$\smallskip
 \begin{itemize}
-\item Such ``quasi-experiments'' rely on a selection-on-observables argument (for $Z_i$, instead $D_i$)
+\item Such ``natural experiments'' rely on a selection-on-observables argument (for $Z_i$, instead $D_i$)
 \smallskip
 \item Still worry about exclusion: $Z_i$ cannot affect $Y_i$ except through $D_i$
 \end{itemize}\pause{}\medskip
@@ -118,15 +118,63 @@
 \smallskip
 \item Fixed school start dates mean students who drop out at 16 get more or less schooling depending on their birth date\pause{}
 \smallskip
-\item Quarter-of-birth seems quasi-randomly assigned... is it excludable? Some evidence that older students learn more in each grade...
+\item Quarter-of-birth seems quasi-randomly assigned --- is it excludable? See Buckles and Hungerman (2013)...
 \end{itemize}
 \end{itemize}
 \end{frame}
 
+\begin{frame}{The Quarter-of-Birth Natural Experiment: Visualized}
+
+\vspace{-0.3cm}
+\begin{center}
+\includegraphics[scale=0.45]{./lecture_includes/qob1.png}
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Quarter-of-Birth IV Estimates of Returns to Schooling}
+
+\begin{center}
+\includegraphics[scale=0.32]{./lecture_includes/qob2.png}
+\end{center}
+
+\end{frame}
 
 \subsection{Panel Data}
-\begin{frame}{Exclusion}
-Stuff about Exclusion
+\begin{frame}{Where do IVs Come From? 3) Panel Data}
+\begin{itemize}
+\item We might also combine IV + difference-in-difference identification\smallskip
+\begin{itemize}
+\item E.g. instrument with $Z_i\times Post_t$, controlling for $Z_i$ and $Post_t$ FEs
+\smallskip
+\item This requires two parallel trends assumptions, for the RF and FS
+\smallskip
+\item Still need to worry about the exclusion restriction, as always
+\end{itemize}\pause{}\medskip
+\item Abdulkadiroglu et al. (2016) complement their lottery analysis of takeover charters with an instrumented diff-in-diff analysis\smallskip
+\begin{itemize}
+\item Students enrolled in the ``legacy'' public school were eligible for being ``grandfathered'' into UP, without having to apply to the charter
+\smallskip
+\item We compare their trends in test scores \& enrollment to a matched comparison group of observably-similar students at other schools
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Grandfathering IV: Visualized}
+
+\vspace{-0.2cm}
+\begin{center}
+\includegraphics[scale=0.29]{./lecture_includes/charters2.png}
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Grandfathering IV Estimates of UP Test Score Effects}
+
+\begin{center}
+\includegraphics[scale=0.25]{./lecture_includes/charters3.png}
+\end{center}
+
 \end{frame}
 
 \section{2SLS Mechanics}

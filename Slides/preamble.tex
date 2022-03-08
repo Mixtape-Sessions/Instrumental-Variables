@@ -126,6 +126,7 @@
 
 
 
+
 % Links ----------------------------------------------
 
 \usepackage{hyperref}
@@ -242,4 +243,17 @@
         \node (marker-#1-b) at (0,0) {};%
     \tikz[accent!80!jet, ultra thick, overlay, remember picture, inner sep=4pt]
         \node[draw, rectangle, fit=(marker-#1-a.center) (marker-#1-b.center)] {};%
+}
+
+
+% DAGS
+\usepackage{tikz}
+\usetikzlibrary{shapes,decorations,arrows,calc,arrows.meta,fit,positioning}
+% Tikz settings optimized for causal graphs.
+\tikzset{
+    -Latex,auto,node distance =1 cm and 1 cm,semithick,
+    state/.style ={ellipse, draw, minimum width = 0.7 cm},
+    point/.style = {circle, draw, inner sep=0.04cm,fill,node contents={}},
+    bidirected/.style={Latex-Latex,dashed},
+    el/.style = {inner sep=2pt, align=left, sloped}
 }

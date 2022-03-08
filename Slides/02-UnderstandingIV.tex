@@ -12,87 +12,124 @@
 
 \subsection{True Lotteries}
 \begin{frame}{Subtlties of the Validity Condition}
-\begin{itemize}
-\item To apply IV, we need to make a good case for instrument validity \\ (note we can always check relevance!)\pause{}
+
+To apply IV, we need to make a good case for instrument validity \\ (note we can always check relevance!)\pause
 \medskip
-\item Consider our simple causal model, $Y_i=\alpha+\beta D_i+\varepsilon_i$. Validity $Cov(Z_i,\varepsilon_i)=0$ intuitively requires two distinct assumptions:\smallskip\pause{}
+
+Consider our simple causal model, $Y_i=\alpha+\beta D_i+\varepsilon_i$. Validity, $Cov(Z_i,\varepsilon_i)=0$, intuitively requires two distinct assumptions:\pause
 \begin{itemize}
-\item \emph{As-good-as-random assignment}: individuals with higher/lower potential earnings face the same distribution of $Z_i$\smallskip
-\item \emph{Exclusion}: the ``assignment'' of $Z_i$ only affects $Y_i$ through $D_i$
+  \item \bgElectricViolet{As-good-as-random assignment}: individuals with higher/lower potential earnings face the same distribution of $Z_i$
+  \item \bgElectricViolet{Exclusion}: the ``assignment'' of $Z_i$ only affects $Y_i$ through $D_i$
 \end{itemize}
-\medskip\pause{}
+\medskip\pause
 
-\item Confusingly, old-school econometrics texts sometimes refer to $Cov(Z_i,\varepsilon_i)=0$ as the ``exclusion restriction''
-\smallskip\pause{}
-
+Confusingly, old-school econometrics texts sometimes refer to $Cov(Z_i,\varepsilon_i)=0$ as the ``exclusion restriction''
+\pause
 \begin{itemize}
+  \item More modern IV texts take care to distinguish between these two conceptually distinct requirements... 
 \item More modern IV texts take care to distinguish between these two conceptually distinct requirements... 
+  \item More modern IV texts take care to distinguish between these two conceptually distinct requirements... 
 \end{itemize}
-\end{itemize}
+
 \end{frame}
 
 \begin{frame}{A Valid Instrument}
-\begin{center}
-\includegraphics[scale=0.6]{./lecture_includes/dag3.png}
-\end{center}
+  \begin{adjustbox}{width = 0.7\textwidth, center}
+    \begin{tikzpicture}
+      \node[state] (D) at (0,0) {$D$};
+      \node[state] (Y) at (2,0) {$Y$};
+      \node[state, ruby] (epsilon) at (1,1.5) {$\epsilon$};
+      \node[state, kelly] (Z) at (-2,0) {$Z$};
+    
+      \path[violet-red, thick] (D) edge node[above, el] {$\violetRed{\beta}$} (Y);
+      \path[ruby, thick] (epsilon) edge (Y);
+      \path[ruby, thick] (epsilon) edge (D);
+      \path[kelly, thick] (Z) edge (D);
+    \end{tikzpicture}
+  \end{adjustbox}
 \end{frame}
 
 \begin{frame}{A Violation of As-Good-As-Random Assignment}
-\begin{center}
-\includegraphics[scale=0.6]{./lecture_includes/dag4.png}
-\end{center}
+  \begin{adjustbox}{width = 0.7\textwidth, center}
+    \begin{tikzpicture}
+      \node[state] (D) at (0,0) {$D$};
+      \node[state] (Y) at (2,0) {$Y$};
+      \node[state, ruby] (epsilon) at (1,1.5) {$\epsilon$};
+      \node[state, kelly] (Z) at (-2,0) {$Z$};
+    
+      \path[violet-red, thick] (D) edge node[above, el] {$\violetRed{\beta}$} (Y);
+      \path[ruby, thick] (epsilon) edge (Y);
+      \path[ruby, thick] (epsilon) edge (D);
+      \path[ruby, thick] (epsilon) edge (Z);
+      \path[kelly, thick] (Z) edge (D);
+    \end{tikzpicture}
+  \end{adjustbox}
 \end{frame}
 
 \begin{frame}{A Violation of Exclusion}
-\begin{center}
-\includegraphics[scale=0.6]{./lecture_includes/dag5.png}
-\end{center}
+  \begin{adjustbox}{width = 0.7\textwidth, center}
+    \begin{tikzpicture}
+      \node[state] (D) at (0,0) {$D$};
+      \node[state] (Y) at (2,0) {$Y$};
+      \node[state, ruby] (epsilon) at (1,1.5) {$\epsilon$};
+      \node[state, kelly] (Z) at (-2,0) {$Z$};
+    
+      \path[violet-red, thick] (D) edge node[above, el] {$\violetRed{\beta}$} (Y);
+      \path[ruby, thick] (epsilon) edge (Y);
+      \path[ruby, thick] (epsilon) edge (D);
+      \path[ruby, thick] (Z) edge[bend right = 40] (Y);
+      \path[kelly, thick] (Z) edge (D);
+    \end{tikzpicture}
+  \end{adjustbox}
 \end{frame}
 
-\begin{frame}{Where do IVs Come From? 1) True Lotteries}
+\begin{frame}{Where do IVs Come From?}{1. True Lotteries}
+
+One sure-fire way to ensure that a $Z_i$ is as-good-as-randomly assigned is... \pause to randomly assign it!\pause
+
 \begin{itemize}
-\item One sure-fire way to ensure that a $Z_i$ is as-good-as-randomly assigned is... \pause{} to randomly assign it!\pause{}\smallskip
-\begin{itemize}
-\item Some of the best IVs come from lotteries, either run by the researcher (e.g. an RCT) or so-called ``natural experiments''
-\smallskip
-\item We still need to worry about violations of the exclusion restriction
-\smallskip
-\item Relevance holds when $Z_i$ has some effect on $X_i$
-\end{itemize}\pause{}
+  \item Some of the best IVs come from lotteries, either run by the researcher (e.g. an RCT) or so-called ``natural experiments''
+
+  \item We still need to worry about violations of the exclusion restriction
+
+  \item Relevance holds when $Z_i$ has some effect on $X_i$
+\end{itemize}\pause
 \medskip
 
-\item ``Gold standard'' IV: a randomized offer to participate in a program, with $X_i$ recording program participation\smallskip
+``Gold standard'' IV: a randomized offer to participate in a program, with $X_i$ recording program participation
 \begin{itemize}
-\item Exclusion restriction likely to hold for any $Y_i$, by construction
-\smallskip
-\item Relevance almost guaranteed (provided people want the program!)
+  \item Exclusion restriction likely to hold for any $Y_i$, by construction
+
+  \item Relevance almost guaranteed (provided people want the program!)
 \end{itemize}
+
+\end{frame}
+
+\begin{frame}{Example}{Charter School Lotteries}
+Abdulkadiroglu et al. (2016) are interested in whether going to a ``charter'' middle school increases standardized test scores
+\begin{itemize}
+  \item Charter students tend to score better, but we worry about selection
+
+  \item History of doubting educational inputs, since Coleman (1966)
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Example: Charter School Lotteries}
+\begin{frame}{Example}{Charter School Lotteries}
+We leverage an institutional feature of charters: \emph{admission lotteries}
 \begin{itemize}
-\item Abdulkadiroglu et al. (2016) are interested in whether going to a ``charter'' middle school increases standardized test scores\smallskip
+  \item When more kids want to enroll than there are seats, admission offers $Z_i\in\{0,1\}$ are effectively drawn from a hat
+
+  \item Offers plausibly only affect later test scores $Y_i$ by changing charter enrollment $D_i\in\{0,1\}$, so are plausibly valid instruments
+
+  \item We need to control for lottery fixed effects (``risk sets'') to make $Z_i$ as-good-as-randomly assigned -- more on this soon
+\end{itemize}
+\pause
+
+We study a particular charter (UP Academy), which is ``takeover''
 \begin{itemize}
-\item Charter students tend to score better, but we worry about selection
-\smallskip
-\item History of doubting educational inputs, since Coleman (1966)
+  \item Two offer IVs: ``immediate'' (on lottery night) and from a waitlist
 \end{itemize}
-\medskip\pause{}
-\item We leverage an institutional feature of charters: \emph{admission lotteries}\smallskip
-\begin{itemize}
-\item When more kids want to enroll than there are seats, admission offers $Z_i\in\{0,1\}$ are effectively drawn from a hat
-\smallskip
-\item Offers plausibly only affect later test scores $Y_i$ by changing charter enrollment $D_i\in\{0,1\}$, so are plausibly valid instruments
-\smallskip
-\item We need to control for lottery fixed effects (``risk sets'') to make $Z_i$ as-good-as-randomly assigned -- more on this soon
-\end{itemize}
-\medskip\pause{}
-\item We study a particular charter (UP Academy), which is ``takeover''\smallskip
-\begin{itemize}
-\item Two offer IVs: ``immediate'' (on lottery night) and from a waitlist
-\end{itemize}
-\end{itemize}
+
 \end{frame}
 
 \begin{frame}{Lottery IV Estimates of UP Test Score Effects}
@@ -104,22 +141,24 @@
 \end{frame}
 
 \subsection{Natural Experiments}
-\begin{frame}{Where do IVs Come From? 2) Natural Experiments}
+\begin{frame}{Where do IVs Come From?}{2. Natural Experiments}
+Without appealing to literal randomization, we may credibly argue $Z_i$ is as-good-as-randomly assigned conditional on some $\mathbf{W}_i$
 \begin{itemize}
-\item Without appealing to literal randomization, we may credibly argue $Z_i$ is as-good-as-randomly assigned conditional on some $\mathbf{W}_i$\smallskip
+  \item Such ``natural experiments'' rely on a selection-on-observables argument (for $Z_i$, instead $D_i$)
+
+  \item Still worry about exclusion: $Z_i$ cannot affect $Y_i$ except through $D_i$
+\end{itemize}\pause\medskip
+\end{frame}
+
+\begin{frame}{Example}{Quarter-of-birth}
+Angrist and Krueger (1991) famously estimate labor market returns to schooling with a creative IV: student quarter-of-birth
+
 \begin{itemize}
-\item Such ``natural experiments'' rely on a selection-on-observables argument (for $Z_i$, instead $D_i$)
-\smallskip
-\item Still worry about exclusion: $Z_i$ cannot affect $Y_i$ except through $D_i$
-\end{itemize}\pause{}\medskip
-\item Angrist and Krueger (1991) famously estimate labor market returns to schooling with a creative IV: student quarter-of-birth\smallskip
-\begin{itemize}
-\item Compulsory schooling requirements prevent students from dropping before the day they turn 16 (used to be more binding)
-\smallskip
-\item Fixed school start dates mean students who drop out at 16 get more or less schooling depending on their birth date\pause{}
-\smallskip
-\item Quarter-of-birth seems quasi-randomly assigned --- is it excludable? See Buckles and Hungerman (2013)...
-\end{itemize}
+  \item Compulsory schooling requirements prevent students from dropping before the day they turn 16 (used to be more binding)
+
+  \item Fixed school start dates mean students who drop out at 16 get more or less schooling depending on their birth date\pause
+
+  \item Quarter-of-birth seems quasi-randomly assigned --- is it excludable? See Buckles and Hungerman (2013)...
 \end{itemize}
 \end{frame}
 
@@ -141,22 +180,24 @@
 \end{frame}
 
 \subsection{Panel Data}
-\begin{frame}{Where do IVs Come From? 3) Panel Data}
+\begin{frame}{Where do IVs Come From?}{3. Panel Data}
+
+We might also combine IV + difference-in-differences identification
 \begin{itemize}
-\item We might also combine IV + difference-in-difference identification\smallskip
+  \item E.g. instrument with $Z_i\times Post_t$, controlling for $Z_i$ and $Post_t$ FEs
+
+  \item This requires two parallel trends assumptions, for the RF and FS
+
+  \item Still need to worry about the exclusion restriction, as always
+\end{itemize}\pause\medskip
+\end{frame}
+
+\begin{frame}{Example}{School Lottery}
+Abdulkadiroglu et al. (2016) complement their lottery analysis of takeover charters with an instrumented diff-in-diff analysis
 \begin{itemize}
-\item E.g. instrument with $Z_i\times Post_t$, controlling for $Z_i$ and $Post_t$ FEs
-\smallskip
-\item This requires two parallel trends assumptions, for the RF and FS
-\smallskip
-\item Still need to worry about the exclusion restriction, as always
-\end{itemize}\pause{}\medskip
-\item Abdulkadiroglu et al. (2016) complement their lottery analysis of takeover charters with an instrumented diff-in-diff analysis\smallskip
-\begin{itemize}
-\item Students enrolled in the ``legacy'' public school were eligible for being ``grandfathered'' into UP, without having to apply to the charter
-\smallskip
-\item We compare their trends in test scores \& enrollment to a matched comparison group of observably-similar students at other schools
-\end{itemize}
+  \item Students enrolled in the ``legacy'' public school were eligible for being ``grandfathered'' into UP, without having to apply to the charter
+
+  \item We compare their trends in test scores \& enrollment to a matched comparison group of observably-similar students at other schools
 \end{itemize}
 \end{frame}
 
@@ -181,78 +222,92 @@
 
 \subsection{Just-Identified IV}
 \begin{frame}{Just-Identified IV}
+
+As you likely know, the general \code{ivregress} command (or its equivalent \code{fixes::feols} in R) allows for controls and multiple treatments / instruments
 \begin{itemize}
-\item As you likely know, the general \emph{ivregress} command (or its equivalent in R) allows for controls and multiple treatments / instruments\smallskip
-\begin{itemize}
-\item When \# treatment = \# instruments, we say the IV is ``just-identified'':
-\end{itemize}\pause{}\vspace{-0.3cm}
+  \item When \# treatment = \# instruments, we say the IV is ``just-identified'':
+\end{itemize}\pause\vspace{-0.5cm}
+
 \begin{align*}
 Y_i &=  \beta D_i +\mathbf{W}_i^\prime\boldsymbol{\gamma} +  \varepsilon_i\hspace{0.2cm}\text{(second stage)}\\
 X_i &= \pi Z_i + \mathbf{W}_i^\prime\boldsymbol{\mu} + \eta_i\hspace{0.2cm}\text{(first stage)}
 \end{align*}
-where $\mathbf{W}_i$ includes a constant.\pause{} Reduced form: $Y_i= \rho Z_i + \mathbf{W}_i^\prime\boldsymbol{\kappa}+\nu_i $\pause{}\vspace{0.3cm}
-\item Same identification logic as before:
-\smallskip
+where $\mathbf{W}_i$ includes a constant.
+\end{frame}
+
+\begin{frame}{Just-Identified IV}
+The reduced form is: $$Y_i= \rho Z_i + \mathbf{W}_i^\prime\boldsymbol{\kappa}+\nu_i $$\pause
+Same identification logic as before:
+
 \begin{itemize}
-\item Validity: $Cov(Z_i,\varepsilon_i)=0$, allowing $Cov(Z_i,\mathbf{W}_i)\neq 0$\pause{}\smallskip
-\item Relevance: $\pi\neq 0$, so $Z_i$ and $D_i$ are correlated controlling for $\mathbf{W}_i$
-\end{itemize}\pause{}\medskip
-\item IV is still "reduced form over first stage'': ($\beta=\rho/\pi$)\pause{}\vspace{0.1cm}
+  \item Validity: $Cov(Z_i,\varepsilon_i)=0$, allowing $Cov(Z_i,\mathbf{W}_i)\neq 0$\pause
+  \item Relevance: $\pi\neq 0$, so $Z_i$ and $D_i$ are correlated controlling for $\mathbf{W}_i$
+\end{itemize}\pause\medskip
+
+IV is still ``reduced form over first stage'': ($\beta=\rho/\pi$)\pause\vspace{0.1cm}
 \begin{itemize}
-\item Can use Frisch-Waugh-Lovell to ``partial out'' $\mathbf{W}_i$ from $Y_i$, $X_i$, $D_i$, \\ and so get back to an IV regression without controls
-\end{itemize}
+  \item Can use Frisch-Waugh-Lovell to ``partial out'' $\mathbf{W}_i$ from $Y_i$, $X_i$, $D_i$, \\ and so get back to an IV regression without controls
 \end{itemize}
 \end{frame}
 
 \subsection{Overidentification}
 \begin{frame}{Overidentification}
-\begin{itemize}
-\item Sometimes we have more than one instrument $Z_{i\ell}$, for $\ell=1,\dots,L$
-\smallskip
-\begin{itemize}\pause{}
-\item This leads to an ``overidentified'' IV regression:
-\end{itemize}
-\vspace{-0.3cm}
+Sometimes we have more than one instrument $Z_{i\ell}$, for $\ell=1,\dots,L$. This leads to an ``overidentified'' IV regression:
+
+\vspace{-1cm}
 \begin{align*}
 Y_i &=  \beta D_i +\mathbf{W}_i^\prime\boldsymbol{\gamma} +  \varepsilon_i\hspace{0.2cm}\text{(second stage)}\\
 X_i &= \mathbf{Z}_i^\prime\boldsymbol{\pi} + \mathbf{W}_i^\prime\boldsymbol{\mu} + \eta_i\hspace{0.2cm}\text{(first stage)}
 \end{align*}
-where $\mathbf{Z}_i=[Z_{i1},\dots,Z_{iL}]^\prime$. Reduced form: $Y_i= \mathbf{Z}_i^\prime\boldsymbol{\rho} + \mathbf{W}_i^\prime\boldsymbol{\kappa}+\nu_i $\pause{}\medskip
+where $\mathbf{Z}_i=[Z_{i1},\dots,Z_{iL}]^\prime$. Reduced form: $Y_i= \mathbf{Z}_i^\prime\boldsymbol{\rho} + \mathbf{W}_i^\prime\boldsymbol{\kappa}+\nu_i $\pause
 
-\item Validity: $Cov(Z_{i\ell},\varepsilon_i)=0$ for all $\ell$\smallskip
+Validity: $Cov(Z_{i\ell},\varepsilon_i)=0$ for all $\ell$
 \begin{itemize}
-\item ``Overidentified'' because we could use any $Z_{i\ell}$ to estimate $\beta=\boldsymbol{\rho}_\ell/\boldsymbol{\pi}_\ell$\pause{}\smallskip
-\item Relevance: $\boldsymbol{\pi}_\ell\neq 0$ for at least some $\ell$
-\end{itemize}\pause{}\medskip
+  \item ``Overidentified'' because we could use any $Z_{i\ell}$ to estimate $\beta=\boldsymbol{\rho}_\ell/\boldsymbol{\pi}_\ell$\pause
+  \item Relevance: $\boldsymbol{\pi}_\ell\neq 0$ for at least some $\ell$
+\end{itemize}\pause\medskip
 
-\item Overidentification can yield tests of IV validity\smallskip
+Overidentification can yield tests of IV validity
 \begin{itemize}
-\item Intuitively, 2SLS checks whether all the $Z_{i\ell}$ yields the same IV estimate, which is sensible in a constant-effects model...
-\end{itemize}
+  \item Intuitively, 2SLS checks whether all the $Z_{i\ell}$ yields the same IV estimate, which is sensible in a constant-effects model...
 \end{itemize}
 \end{frame}
 
 \begin{frame}{Putting the ``2S'' in ``2SLS''}
+
+You'll notice I haven't actually defined 2SLS beyond the simple case
 \begin{itemize}
-\item You'll notice I haven't actually defined 2SLS beyond the simple case\smallskip
-\begin{itemize}
+  \item Before we had $\beta^{IV}=\frac{Cov(Z_i,Y_i)}{Cov(Z_i,D_i)}$ leading to $\widehat\beta^{IV}=\frac{\widehat{Cov}(Z_i,Y_i)}{\widehat{Cov}(Z_i,D_i)}$ 
 \item Before we had $\beta^{IV}=\frac{Cov(Z_i,Y_i)}{Cov(Z_i,D_i)}$ leading to $\widehat\beta^{IV}=\frac{\widehat{Cov}(Z_i,Y_i)}{\widehat{Cov}(Z_i,D_i)}$ 
-\item General form follows similarly (sample analog), but is notation-heavy
+  \item Before we had $\beta^{IV}=\frac{Cov(Z_i,Y_i)}{Cov(Z_i,D_i)}$ leading to $\widehat\beta^{IV}=\frac{\widehat{Cov}(Z_i,Y_i)}{\widehat{Cov}(Z_i,D_i)}$ 
+  \item General form follows similarly (sample analog), but is notation-heavy
 \end{itemize}
-\bigskip\pause{}
-\item A more useful way to define 2SLS is by a two-step procedure:\smallskip
+\pause
+
+A more useful way to define 2SLS is by a two-step procedure:
 \begin{itemize}
-\item First regress $D_i$ on all $Z_{i\ell}$ and $W_{ik}$\smallskip
+  \item First regress $D_i$ on all $Z_{i\ell}$ and $W_{ik}$
+  \item Then regress $Y_i$ on the ``fitted values'' $\widehat{D}_i$ and controls $W_{ik}$ 
 \item Then regress $Y_i$ on the ``fitted values'' $\widehat{D}_i$ and controls $W_{ik}$ 
-\end{itemize}\bigskip\pause{}
-\item The proof of this follows from some (simple) linear algebra \smallskip
+  \item Then regress $Y_i$ on the ``fitted values'' $\widehat{D}_i$ and controls $W_{ik}$ 
+\end{itemize}
+\pause
+
+The proof of this follows from some (simple) linear algebra 
 \begin{itemize}
-\item Intuitively, regressing $Y_i$ on $\widehat{\pi}^{OLS}Z_i$ gives a scaled RF: $\widehat\beta^{IV}=\frac{\widehat{\rho}^{OLS}}{\widehat{\pi}^{OLS}}$
-\end{itemize}\bigskip\pause{}
-\item Although easy, you should never do such ``manual 2SLS'' yourself!\smallskip
+  \item Intuitively, regressing $Y_i$ on $\widehat{\pi}^{OLS}Z_i$ gives a scaled RF: 
+  $$\widehat\beta^{IV}=\frac{\widehat{\rho}^{OLS}}{\widehat{\pi}^{OLS}}$$
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Putting the ``2S'' in ``2SLS''}
+
+$$\widehat\beta^{IV}=\frac{\widehat{\rho}^{OLS}}{\widehat{\pi}^{OLS}}$$
+
+\medskip
+Although easy, you should never do such ``manual 2SLS'' yourself!
 \begin{itemize}
 \item Your point estimates will be right, but your SEs won't be!
-\end{itemize}
 \end{itemize}
 \end{frame}
 
@@ -260,22 +315,25 @@ where $\mathbf{Z}_i=[Z_{i1},\dots,Z_{iL}]^\prime$. Reduced form: $Y_i= \mathbf{Z
 
 \subsection{Weak IV}
 \begin{frame}{Weak Instruments}
+
+When running just-identified IV, you should always worry about the ``strength'' of your instrument
 \begin{itemize}
-\item When running just-identified IV, you should always worry about the ``strength'' of your instrument\smallskip
-\begin{itemize}
-\item Specifically the first stage ``F-statistic,'' which tests $\pi^{OLS}=0$ 
-\end{itemize}\bigskip\pause{}
-\item If $\pi^{OLS}$ is small relative to its standard error, the IV is ``weak''\smallskip
-\begin{itemize}
-\item Typically use the rule-of-thumb of $F<10$ (Staiger and Stock 1997)\smallskip
-\item In this case the second-stage SEs will be large and the 2SLS estimate will tend to be biased towards the corresponding OLS estimate
-\end{itemize}\bigskip\pause{}
-\item Much made of this over the years, but Angrist and Koles\'{a}r (2022) argue recently that we shouldn't worry too much\smallskip
-\begin{itemize}
-\item The SE increase tends to be large enough to ``cover up'' the bias\smallskip
-\item Just-id. 2SLS is ``approximately median-unbiased'' (as it is LIML)
+  \item Specifically the first stage \bgPictonBlue{F-statistic}, which tests $\pi^{OLS}=0$ 
 \end{itemize}
+\smallskip\pause
+
+If $\pi^{OLS}$ is small relative to its standard error, the IV is ``weak''
+\begin{itemize}
+  \item Typically use the rule-of-thumb of $F<10$ (Staiger and Stock 1997)
+  \item In this case the second-stage SEs will be large and the 2SLS estimate will tend to be biased towards the corresponding OLS estimate
+\end{itemize}\pause
+
+Much made of this over the years, but Angrist and Koles\'{a}r (2022) argue recently that we shouldn't worry too much
+\begin{itemize}
+  \item The SE increase tends to be large enough to ``cover up'' the bias
+  \item Just-id. 2SLS is ``approximately median-unbiased'' (as it is LIML)
 \end{itemize}
+
 \end{frame}
 
 \begin{frame}{Weak Instruments: Visualized}
@@ -305,22 +363,24 @@ Monte Carlo: $Y_i=\varepsilon_i$, $D_i=\Pi Z_i+\eta_i$: $\Pi=0.01$ (Very Weak)
 
 \subsection{Many IVs}
 \begin{frame}{Many IVs}
+
+A more pernicious problem is many-instrument bias, when overid\smallskip
 \begin{itemize}
-\item A more pernicious problem is many-instrument bias, when overid\smallskip
-\begin{itemize}
-\item Also tends to manifest in low first-stage F's, so also good to check
+  \item Also tends to manifest in low first-stage F's, so also good to check
 \end{itemize}\bigskip\pause{}
-\item Many-IV bias is also towards OLS, but unlike before SEs go \emph{down}\smallskip
+
+Many-IV bias is also towards OLS, but unlike before SEs go \emph{down}\smallskip
 \begin{itemize}
-\item Intuitively, a more flexible FS tends to fit $D_i$ better $\rightarrow$ more power\smallskip
-\item But we can have \emph{overfitting} with lots of $Z_i$ $\rightarrow$ essentially recreate $D_i$
+  \item Intuitively, a more flexible FS tends to fit $D_i$ better $\rightarrow$ more power\smallskip
+  \item But we can have \emph{overfitting} with lots of $Z_i$ $\rightarrow$ essentially recreate $D_i$
 \end{itemize}\bigskip\pause{}
-\item As we'll see, this bias is especially relevant in judge IV designs\smallskip
+
+As we'll see, this bias is especially relevant in judge IV designs\smallskip
 \begin{itemize}
-\item Potentially many judge assignment indicators as the instrument\smallskip
-\item Leave-out corrections (e.g. Angrist et al. 1999) have been adapted to this setting in recent years (e.g. Koles\'{a}r 2013)
+  \item Potentially many judge assignment indicators as the instrument\smallskip
+  \item Leave-out corrections (e.g. Angrist et al. 1999) have been adapted to this setting in recent years (e.g. Koles\'{a}r 2013)
 \end{itemize}
-\end{itemize}
+
 \end{frame}
 
 \begin{frame}{Weak and Many Instruments VIII}

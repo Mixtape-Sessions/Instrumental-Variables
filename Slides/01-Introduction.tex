@@ -3,18 +3,6 @@
 \input{preamble.tex}
 
 
-\usepackage{tikz}
-\usetikzlibrary{shapes,decorations,arrows,calc,arrows.meta,fit,positioning}
-% Tikz settings optimized for causal graphs.
-\tikzset{
-    -Latex,auto,node distance =1 cm and 1 cm,semithick,
-    state/.style ={ellipse, draw, minimum width = 0.7 cm},
-    point/.style = {circle, draw, inner sep=0.04cm,fill,node contents={}},
-    bidirected/.style={Latex-Latex,dashed},
-    el/.style = {inner sep=2pt, align=left, sloped}
-}
-
-
 
 \begin{document}
 
@@ -197,12 +185,12 @@ Adding more controls (e.g. demographics) may or may not help
 \begin{frame}{Regression ``Exogeneity''}
   \begin{adjustbox}{width = 0.6\textwidth, center}
     \begin{tikzpicture}
-      \node[state] (1) at (0,0) {$D$};
-      \node[state] (2) at (2,0) {$Y$};
-      \node[state, ruby] (3) at (1,1.5) {$\epsilon$};
+      \node[state] (D) at (0,0) {$D$};
+      \node[state] (Y) at (2,0) {$Y$};
+      \node[state, ruby] (epsilon) at (1,1.5) {$\epsilon$};
     
-      \path[violet-red, thick] (1) edge node[above, el] {$\violetRed{\beta}$} (2);
-      \path[ruby, thick] (3) edge (2);
+      \path[violet-red, thick] (D) edge node[above, el] {$\violetRed{\beta}$} (Y);
+      \path[ruby, thick] (epsilon) edge (Y);
     \end{tikzpicture}
   \end{adjustbox}
 \end{frame}
@@ -210,13 +198,13 @@ Adding more controls (e.g. demographics) may or may not help
 \begin{frame}{Regression ``Endogeneity''}
   \begin{adjustbox}{width = 0.6\textwidth, center}
     \begin{tikzpicture}
-      \node[state] (1) at (0,0) {$D$};
-      \node[state] (2) at (2,0) {$Y$};
-      \node[state, ruby] (3) at (1,1.5) {$\epsilon$};
+      \node[state] (D) at (0,0) {$D$};
+      \node[state] (Y) at (2,0) {$Y$};
+      \node[state, ruby] (epsilon) at (1,1.5) {$\epsilon$};
     
-      \path[violet-red, thick] (1) edge node[above, el] {$\violetRed{\beta}$} (2);
-      \path[ruby, thick] (3) edge (2);
-      \path[ruby, thick] (3) edge (1);
+      \path[violet-red, thick] (D) edge node[above, el] {$\violetRed{\beta}$} (Y);
+      \path[ruby, thick] (epsilon) edge (Y);
+      \path[ruby, thick] (epsilon) edge (D);
     \end{tikzpicture}
   \end{adjustbox}
 \end{frame}
@@ -243,15 +231,15 @@ Indeed, this leads us to IV estimands (and estimators)
 \begin{frame}{The IV Solution}
   \begin{adjustbox}{width = 0.7\textwidth, center}
     \begin{tikzpicture}
-      \node[state] (1) at (0,0) {$D$};
-      \node[state] (2) at (2,0) {$Y$};
-      \node[state, ruby] (3) at (1,1.5) {$\epsilon$};
-      \node[state, kelly] (4) at (-2,0) {$Z$};
+      \node[state] (D) at (0,0) {$D$};
+      \node[state] (Y) at (2,0) {$Y$};
+      \node[state, ruby] (epsilon) at (1,1.5) {$\epsilon$};
+      \node[state, kelly] (Z) at (-2,0) {$Z$};
     
-      \path[violet-red, thick] (1) edge node[above, el] {$\violetRed{\beta}$} (2);
-      \path[ruby, thick] (3) edge (2);
-      \path[ruby, thick] (3) edge (1);
-      \path[kelly, thick] (4) edge (1);
+      \path[violet-red, thick] (D) edge node[above, el] {$\violetRed{\beta}$} (Y);
+      \path[ruby, thick] (epsilon) edge (Y);
+      \path[ruby, thick] (epsilon) edge (D);
+      \path[kelly, thick] (Z) edge (D);
     \end{tikzpicture}
   \end{adjustbox}
 \end{frame}

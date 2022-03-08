@@ -20,6 +20,18 @@
 \definecolor{sun}{HTML}{ffaf18}
 \definecolor{electric-violet}{HTML}{871EFF}
 
+\newcommand\pictonBlue[1]{{\color{picton-blue}#1}}
+\newcommand\sun[1]{{\color{sun}#1}}
+\newcommand\electricViolet[1]{{\color{electric-violet}#1}}
+\newcommand\violetRed[1]{{\color{violet-red}#1}}
+
+\newcommand\bgPictonBlue[1]{{\colorbox{picton-blue!20!white}{#1}}}
+\newcommand\bgSun[1]{{\colorbox{sun!20!white}{#1}}}
+\newcommand\bgElectricViolet[1]{{\colorbox{electric-violet!20!white}{#1}}}
+\newcommand\bgVioletRed[1]{{\colorbox{violet-red!20!white}{#1}}}
+
+\def\code#1{\texttt{#1}}
+
 % Main theme colors
 \definecolor{accent}{HTML}{00b7ff}
 \definecolor{accent2}{HTML}{871EFF}
@@ -80,6 +92,11 @@
 
 % Bullet points
 
+%% Fix spacing between items
+\let\olditemize=\itemize 
+\let\endolditemize=\enditemize 
+\renewenvironment{itemize}{\vspace{0.25em}\olditemize \itemsep0.25em}{\endolditemize}
+
 %% Fix left-margins
 \settowidth{\leftmargini}{\usebeamertemplate{itemize item}}
 \addtolength{\leftmargini}{\labelsep}
@@ -123,7 +140,7 @@
 
 % Line spacing --------------------------------------
 \usepackage{setspace}
-\setstretch{1.1}
+\setstretch{1.25}
 
 
 % \begin{columns} -----------------------------------

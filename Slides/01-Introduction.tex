@@ -3,6 +3,18 @@
 \input{preamble.tex}
 
 
+\usepackage{tikz}
+\usetikzlibrary{shapes,decorations,arrows,calc,arrows.meta,fit,positioning}
+% Tikz settings optimized for causal graphs.
+\tikzset{
+    -Latex,auto,node distance =1 cm and 1 cm,semithick,
+    state/.style ={ellipse, draw, minimum width = 0.7 cm},
+    point/.style = {circle, draw, inner sep=0.04cm,fill,node contents={}},
+    bidirected/.style={Latex-Latex,dashed},
+    el/.style = {inner sep=2pt, align=left, sloped}
+}
+
+
 
 \begin{document}
 
@@ -87,24 +99,40 @@ Three distinct objects (though not always clearly distinguished) \pause\medskip
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Identification vs. Estimation}
+\begin{frame}{The IV Solution}
+  \begin{adjustbox}{width = 0.9\textwidth, center}
+    \begin{tikzpicture}
+      \node[violet-red] (theory) at (-3.5, 1.25) {Economic Theory};
+      \node[state,rectangle,violet-red] (parameters) at (-3.5, 0) {Parameters};
+      
+      \node[picton-blue] (distribution) at (0, 1.25) {Data Distribution};
+      \node[state,rectangle,picton-blue] (estimands) at (0, 0) {Estimands};
 
+      \node[sun] (data) at (3.5, 1.25) {Observed Datasets};
+      \node[state,rectangle,sun] (estimators) at (3.5, 0) {Estimators};
 
-\includegraphics[scale=0.37]{./lecture_includes/BigPicture.png}
-\medskip
+      \path[violet-red, thick, shorten >=4pt] (theory) edge (parameters);
+      \path[picton-blue, thick, shorten >=4pt] (distribution) edge (estimands);
+      \path[sun, thick, shorten >=4pt] (data) edge (estimators);
 
-This course will mostly focus on identification, but we'll cover some IV estimation / inference issues as well
+      \path[thick, shorten >=4pt, shorten <=4pt] (estimands) edge[bend left= 40] node[below, el, yshift=-4pt] {Identifcation} (parameters);
+      \path[thick, shorten >=4pt, shorten <=4pt] (estimators) edge[bend left= 40] node[below, el, yshift=-4pt] {Statistical Inference} (estimands);
+    \end{tikzpicture}
+  \end{adjustbox}
+
+  \vspace{10mm}
+  This course will mostly focus on identification, but we'll cover some IV estimation / inference issues as well
 \end{frame}
 
 \subsection{Regression Identification and Endogeneity}
 \begin{frame}{Let's Get Concrete}
 Human capital theory (e.g. Becker, 1957) tells us that taking one-day IV intensives are likely to boost later-life productivity\pause
 \begin{itemize}
-  \item Parameter: returns to taking this class $\violetRed{\beta}$ {\small(parameter!!)}, measured in some outcome $Y_i$ (e.g. lifetime top-5 pubs / earnings / twitter followers)
+  \item Parameter: returns to taking this class $\violetRed{\beta}$, measured in some outcome $Y_i$ (e.g. lifetime top-5 pubs / earnings / twitter followers)
   \item Simple causal/structural model: $Y_i= \alpha + \violetRed{\beta} D_i + \varepsilon_i$, where $D_i \in \{0,1\}$ indicates taking this class
 \end{itemize}\pause
 
-We see a sample of $Y_i$, $\violetRed{D_i}$, and some other covariates $W_{1i},\dots,W_{Ki}$
+We see a sample of $Y_i$, $D_i$, and some other covariates $W_{1i},\dots,W_{Ki}$
 \begin{itemize}
   \item We fire up Stata and \code{reg y d w1-wk, r}. How do we interpret the output?
 \end{itemize}
@@ -167,30 +195,42 @@ Adding more controls (e.g. demographics) may or may not help
 \end{frame}
 
 \begin{frame}{Regression ``Exogeneity''}
-
-\begin{center}
-\includegraphics[scale=0.8]{./lecture_includes/dag1.png}
-\end{center}
-
+  \begin{adjustbox}{width = 0.6\textwidth, center}
+    \begin{tikzpicture}
+      \node[state] (1) at (0,0) {$D$};
+      \node[state] (2) at (2,0) {$Y$};
+      \node[state, ruby] (3) at (1,1.5) {$\epsilon$};
+    
+      \path[violet-red, thick] (1) edge node[above, el] {$\violetRed{\beta}$} (2);
+      \path[ruby, thick] (3) edge (2);
+    \end{tikzpicture}
+  \end{adjustbox}
 \end{frame}
 
 \begin{frame}{Regression ``Endogeneity''}
-
-\begin{center}
-\includegraphics[scale=0.8]{./lecture_includes/dag2.png}
-\end{center}
-
+  \begin{adjustbox}{width = 0.6\textwidth, center}
+    \begin{tikzpicture}
+      \node[state] (1) at (0,0) {$D$};
+      \node[state] (2) at (2,0) {$Y$};
+      \node[state, ruby] (3) at (1,1.5) {$\epsilon$};
+    
+      \path[violet-red, thick] (1) edge node[above, el] {$\violetRed{\beta}$} (2);
+      \path[ruby, thick] (3) edge (2);
+      \path[ruby, thick] (3) edge (1);
+    \end{tikzpicture}
+  \end{adjustbox}
 \end{frame}
+
 
 \begin{frame}{...But Sometimes, You Get What you Need}
 
 Imagine this course was ``oversubscribed,'' and admission was determined by lottery
 \begin{itemize}
-  \item Among those interested in taking the course, a random sample denoted by $\electricViolet{Z_i} = 1$ was given access
-  \item The rest, with $\electricViolet{Z_i} = 0$ not initially given access (maybe got in later)
+  \item Among those interested in taking the course, a random sample denoted by $Z_i = 1$ was given access
+  \item The rest, with $Z_i = 0$ not initially given access (maybe got in later)
 \end{itemize}\medskip\pause
 
-Intuitively, this external shock $\electricViolet{Z_i}$ should be helpful for identifying $\violetRed{\beta}$
+Intuitively, this external shock $Z_i$ should be helpful for identifying $\violetRed{\beta}$
 \begin{itemize}
   \item Affects $D_i$, so relevant to the ``treatment'' of interest
   \item Randomly assigned, so unconfounded by selection (unlike $D_i$)
@@ -201,11 +241,19 @@ Indeed, this leads us to IV estimands (and estimators)
 \end{frame}
 
 \begin{frame}{The IV Solution}
-
-\begin{center}
-\includegraphics[scale=0.8]{./lecture_includes/dag3.png}
-\end{center}
-
+  \begin{adjustbox}{width = 0.7\textwidth, center}
+    \begin{tikzpicture}
+      \node[state] (1) at (0,0) {$D$};
+      \node[state] (2) at (2,0) {$Y$};
+      \node[state, ruby] (3) at (1,1.5) {$\epsilon$};
+      \node[state, kelly] (4) at (-2,0) {$Z$};
+    
+      \path[violet-red, thick] (1) edge node[above, el] {$\violetRed{\beta}$} (2);
+      \path[ruby, thick] (3) edge (2);
+      \path[ruby, thick] (3) edge (1);
+      \path[kelly, thick] (4) edge (1);
+    \end{tikzpicture}
+  \end{adjustbox}
 \end{frame}
 
 \section{Intro to IV}

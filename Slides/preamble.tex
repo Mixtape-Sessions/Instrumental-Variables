@@ -141,7 +141,7 @@
 
 % Line spacing --------------------------------------
 \usepackage{setspace}
-\setstretch{1.25}
+\setstretch{1.35}
 
 
 % \begin{columns} -----------------------------------
@@ -246,7 +246,7 @@
 }
 
 
-% DAGS
+% DAGS ----------------------------------------------
 \usepackage{tikz}
 \usetikzlibrary{shapes,decorations,arrows,calc,arrows.meta,fit,positioning}
 % Tikz settings optimized for causal graphs.
@@ -257,3 +257,17 @@
     bidirected/.style={Latex-Latex,dashed},
     el/.style = {inner sep=2pt, align=left, sloped}
 }
+
+
+% Beamer tricks -------------------------------------
+% Make \pause work in align environments
+\makeatletter
+\renewrobustcmd{\beamer@@pause}[1][]{%
+  \unless\ifmeasuring@%
+  \ifblank{#1}%
+    {\stepcounter{beamerpauses}}%
+    {\setcounter{beamerpauses}{#1}}%
+  \onslide<\value{beamerpauses}->\relax%
+  \fi%
+}
+\makeatother

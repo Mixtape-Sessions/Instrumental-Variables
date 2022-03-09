@@ -2,8 +2,6 @@
 
 \input{preamble.tex}
 
-
-
 \begin{document}
 
 \imageframe{./lecture_includes/cover_intro.png}
@@ -63,9 +61,8 @@ Two 75-minute coding labs, applying what we've learned\pause
 \begin{frame}{Models vs. Estimands vs. Estimators}
 
 Three distinct objects (though not always clearly distinguished) \pause\medskip
-
+{\small
 \begin{itemize}
-
   \item \bgVioletRed{Parameters} come from models of how observed data are generated
   \begin{itemize}\itemsep0em
     \item E.g. a structural supply/demand model or potential outcomes
@@ -85,6 +82,7 @@ Three distinct objects (though not always clearly distinguished) \pause\medskip
     \item Use knowledge of estimator distributions to make learn about estimands (``inference'') and---hopefully---identified parameters
   \end{itemize}
 \end{itemize}
+}
 \end{frame}
 
 \begin{frame}{The IV Solution}
@@ -262,28 +260,38 @@ Two key assumptions:
 
 We then have identification:\vspace{-0.3cm}
 \begin{align*}
-Cov(Z_i,Y_i) &= Cov(Z_i,\alpha + \violetRed{\beta} D_i+\varepsilon_i)= \violetRed{\beta} Cov(Z_i,D_i)+Cov(Z_i,\varepsilon_i)\\
-&= \violetRed{\beta} Cov(Z_i,D_i)\text{, Implying $\violetRed{\beta} = \frac{Cov(Z_i,Y_i)}{Cov(Z_i,D_i)}$}
+  Cov(Z_i,Y_i) &= Cov(Z_i,\alpha + \violetRed{\beta} D_i+\varepsilon_i) \pause = \violetRed{\beta} Cov(Z_i,D_i)+Cov(Z_i,\varepsilon_i) \\ \pause
+  &= \violetRed{\beta} Cov(Z_i,D_i) \pause \implies \violetRed{\beta} = \frac{Cov(Z_i,Y_i)}{Cov(Z_i,D_i)}
 \end{align*}\pause\vspace{-0.3cm}
 
-$\pictonBlue{\beta^{IV}} = \frac{Cov(Z_i,Y_i)}{Cov(Z_i,D_i)}$ is the (simple) IV \emph{estimand}\pause
+\end{frame}
+
+\begin{frame}{The IV Estimand}
+The \bgPictonBlue{(simple) IV \emph{estimand}} is:
+$$\pictonBlue{\beta^{IV}} = \frac{Cov(Z_i,Y_i)}{Cov(Z_i,D_i)}$$ 
+\pause
+
 \begin{itemize}
-\item Compare to the OLS estimand: $\pictonBlue{\beta^{OLS}}=\frac{Cov(D_i,Y_i)}{Var(D_i)}$ 
+  \item Compare to the OLS estimand: $\pictonBlue{\beta^{OLS}}=\frac{Cov(D_i,Y_i)}{Var(D_i)}$ 
 \end{itemize}
 
 \end{frame}
 
 \begin{frame}{``Reduced Form'' and ``First Stage''}
 
-Note we can write 
+Note that we can write:
 \begin{align*}
-\pictonBlue{\beta^{IV}} =\frac{Cov(Z_i,Y_i)}{Cov(Z_i,D_i)}=\frac{Cov(Z_i,Y_i)/Var(Z_i)}{Cov(Z_i,D_i)/Var(Z_i)}=\frac{\pictonBlue{\rho^{OLS}}}{\pictonBlue{\pi^{OLS}}}
+\pictonBlue{\beta^{IV}} = \frac{Cov(Z_i,Y_i)}{Cov(Z_i,D_i)} \pause = \frac{Cov(Z_i,Y_i)/Var(Z_i)}{Cov(Z_i,D_i)/Var(Z_i)} \pause = \frac{\pictonBlue{\rho^{OLS}}}{\pictonBlue{\pi^{OLS}}}
 \end{align*}
 where $\pictonBlue{\rho^{OLS}}$ and $\pictonBlue{\pi^{OLS}}$ are two OLS estimands:\pause
 \begin{align*}
 Y_i &= \kappa^{OLS} + \pictonBlue{\rho^{OLS}} Z_i + V_i \hspace{0.2cm}\text{ ``reduced form''}\\
 D_i &= \mu^{OLS} + \pictonBlue{\pi^{OLS}} Z_i + W_i\hspace{0.2cm}\text{ ``first stage''}
 \end{align*}\vspace{-0.5cm}\pause
+
+\end{frame}
+
+\begin{frame}{IV estimand as the ``Second Stage''}
 
 Sometimes we refer to the IV estimand as the ``second stage'':
 \begin{align*}

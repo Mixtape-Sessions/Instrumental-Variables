@@ -103,7 +103,7 @@ Three distinct objects (though not always clearly distinguished) \pause\medskip
       \path[picton-blue, thick, shorten >=4pt] (distribution) edge (estimands);
       \path[sun, thick, shorten >=4pt] (data) edge (estimators);
 
-      \path[thick, shorten >=4pt, shorten <=4pt] (estimands) edge[bend left= 40] node[below, el, yshift=-4pt] {Identifcation} (parameters);
+      \path[thick, shorten >=4pt, shorten <=4pt] (estimands) edge[bend left= 40] node[below, el, yshift=-4pt] {Identification} (parameters);
       \path[thick, shorten >=4pt, shorten <=4pt] (estimators) edge[bend left= 40] node[below, el, yshift=-4pt] {Statistical Inference} (estimands);
     \end{tikzpicture}
   \end{adjustbox}
@@ -122,7 +122,7 @@ Human capital theory (e.g. Becker, 1957) tells us that taking one-day IV intensi
 
 We see a sample of $Y_i$, $D_i$, and some other covariates $W_{1i},\dots,W_{Ki}$
 \begin{itemize}
-  \item We fire up Stata and \code{reg y d w1-wk, r}. How do we interpret the output?
+  \item We fire up Stata and type \code{reg y d w1-wk, r}. How do we interpret the output?
 \end{itemize}
 
 \end{frame}
@@ -137,7 +137,7 @@ We see a sample of $Y_i$, $D_i$, and some other covariates $W_{1i},\dots,W_{Ki}$
 
 \begin{frame}{Population Regression}
 
-The \bgPictonBlue{population regression} of $Y_i$ on $\mathbf{X}_i=[1, \violetRed{D_i},W_{1i},\dots,W_{Ki}]^\prime$ is given by $Y_i=\mathbf{X}_i^\prime \pictonBlue{\beta^{OLS}} + U_i$ where $E[\mathbf{X}_i U_i]=0$\pause
+The \bgPictonBlue{population regression} of $Y_i$ on $\mathbf{X}_i=[1, D_i,W_{1i},\dots,W_{Ki}]^\prime$ is given by $Y_i=\mathbf{X}_i^\prime \pictonBlue{\beta^{OLS}} + U_i$ where $E[\mathbf{X}_i U_i]=0$\pause
 \begin{itemize}
   \item Equivalently, $\pictonBlue{\beta^{OLS}} = E[\mathbf{X}_i\mathbf{X}_i^\prime]^{-1}E[\mathbf{X}_i Y_i]$ and $U_i = Y_i - \mathbf{X}_i^\prime \pictonBlue{\beta^{OLS}} $\smallskip
 \item $\pictonBlue{\beta^{OLS}} $ contains regression \emph{coefficients}; $U_i$ is the regression \emph{residual} 

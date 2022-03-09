@@ -27,8 +27,6 @@ Confusingly, old-school econometrics texts sometimes refer to $Cov(Z_i,\varepsil
 \pause
 \begin{itemize}
   \item More modern IV texts take care to distinguish between these two conceptually distinct requirements... 
-\item More modern IV texts take care to distinguish between these two conceptually distinct requirements... 
-  \item More modern IV texts take care to distinguish between these two conceptually distinct requirements... 
 \end{itemize}
 
 \end{frame}
@@ -189,7 +187,7 @@ We might also combine IV + difference-in-differences identification
   \item This requires two parallel trends assumptions, for the RF and FS
 
   \item Still need to worry about the exclusion restriction, as always
-\end{itemize}\pause\medskip
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Example}{School Lottery}
@@ -278,8 +276,6 @@ Overidentification can yield tests of IV validity
 You'll notice I haven't actually defined 2SLS beyond the simple case
 \begin{itemize}
   \item Before we had $\beta^{IV}=\frac{Cov(Z_i,Y_i)}{Cov(Z_i,D_i)}$ leading to $\widehat\beta^{IV}=\frac{\widehat{Cov}(Z_i,Y_i)}{\widehat{Cov}(Z_i,D_i)}$ 
-\item Before we had $\beta^{IV}=\frac{Cov(Z_i,Y_i)}{Cov(Z_i,D_i)}$ leading to $\widehat\beta^{IV}=\frac{\widehat{Cov}(Z_i,Y_i)}{\widehat{Cov}(Z_i,D_i)}$ 
-  \item Before we had $\beta^{IV}=\frac{Cov(Z_i,Y_i)}{Cov(Z_i,D_i)}$ leading to $\widehat\beta^{IV}=\frac{\widehat{Cov}(Z_i,Y_i)}{\widehat{Cov}(Z_i,D_i)}$ 
   \item General form follows similarly (sample analog), but is notation-heavy
 \end{itemize}
 \pause
@@ -287,8 +283,6 @@ You'll notice I haven't actually defined 2SLS beyond the simple case
 A more useful way to define 2SLS is by a two-step procedure:
 \begin{itemize}
   \item First regress $D_i$ on all $Z_{i\ell}$ and $W_{ik}$
-  \item Then regress $Y_i$ on the ``fitted values'' $\widehat{D}_i$ and controls $W_{ik}$ 
-\item Then regress $Y_i$ on the ``fitted values'' $\widehat{D}_i$ and controls $W_{ik}$ 
   \item Then regress $Y_i$ on the ``fitted values'' $\widehat{D}_i$ and controls $W_{ik}$ 
 \end{itemize}
 \pause

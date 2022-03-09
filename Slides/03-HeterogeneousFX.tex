@@ -11,37 +11,222 @@
 \section{The LATE Theorem}
 
 \subsection{Potential Outcome Setup}
+\begin{frame}{From Constant to Heterogeneous Effects}
+So far we have implicitly been considering models w/ constant effects
+\begin{itemize}
+\item $Y_i=\alpha+\beta D_i+\varepsilon_i$ implies $\partial Y/\partial D = \beta$ for all observations $i$\smallskip
+\item What if this model is \emph{misspecified}? I.e. $Y_i=\alpha+\beta_i D_i+\varepsilon_i$
+\end{itemize}\medskip\pause{}
+Intuitively, different ``research designs'' (e.g. instruments) may capture different effects of the same treatment --- even when all are valid\smallskip
+\begin{itemize}
+\item Recall charter lottery vs. takeover IVs: very different setups!
+\end{itemize}\medskip\pause{}
+Formalized in the (Nobel-winning!) Imbens and Angrist '94 LATE thm.\smallskip
+\begin{itemize}
+\item Using a general potential outcomes framework...
+\end{itemize}
+\end{frame}
+
 \begin{frame}{Potential Outcome Setup}
-Stuff about the potential outcome setup
+Let $Y_i(0)$ and $Y_i(1)$ denote individual $i$'s potential outcomes given a binary treatment $D_i\in\{0,1\}$\smallskip
+\begin{itemize}
+\item Observed outcomes: $Y_i=(1-D_i)Y_i(0)+D_iY_i(1)\pause{}=\alpha_i+\beta_i D_i$\smallskip\pause{}
+\item Only observe one of these POs for each $i$; other is a \emph{counterfactual}\smallskip
+\item Interested in the treatment effects $\beta_i=Y_i(1)-Y_i(0)$
+\end{itemize}\medskip\pause{}
+Imbens-Angrist' insight: we can also do this for an IV first stage:\smallskip
+\begin{itemize}
+\item Let $D_i(0)$ and $D_i(1)$ denote individual $i$'s potential \emph{treatment} given a binary \emph{instrument} $Z_i\in\{0,1\}$:\pause{} $D_i=(1-Z_i)D_i(0)+Z_i D_i(1)$\smallskip
+\end{itemize}\medskip\pause{}
+Under what assumptions can we causally interpret \code{ivreg2 Y (D=Z)}?
 \end{frame}
 
 \subsection{Theorem and Extensions}
-\begin{frame}{Theorem and Extensions}
-Stuff about the theorem and extensions
+\begin{frame}{Imbens and Angrist (1994) Assumptions}
+\begin{enumerate}
+\item \emph{As-good-as-random assignment}: $Z_i\perp (Y_i(0),Y_i(1),D_i(0),D_i(1))$\smallskip
+\begin{itemize}
+\item Consider the Angrist draft lottery, or Angrist-Krueger's QoB IV
+\end{itemize}\medskip\pause{}
+\item \emph{Exclusion}: $Z_i$ only affects $Y_i$ through its effect on $D_i$\smallskip
+\begin{itemize}
+\item Implicit in our potential outcomes notation: $Y_i(d)$ not indexed by $Z_i$
+\end{itemize}\medskip\pause{}
+\item \emph{Relevance}: $Z_i$ is correlated with $D_i$\smallskip
+\begin{itemize}
+\item Equivalently, given Assumption 1, $E[D_{i}(1)-D_i(0)]\neq 0$
+\end{itemize}\medskip\pause{}
+\item \emph{Monotonicity}: $D_{i}(1)\ge D_{i}(0)$ for all $i$ (i.e., almost-surely)\smallskip
+\begin{itemize}
+\item The instrument can only shift the treatment in one direction
+\end{itemize}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Local Average Treatment Effect (LATE) Identification}
+Imbens and Angrist showed that under these assumptions:
+\begin{align*}
+\beta^{IV}=E[Y_i(1)-Y_i(0)\mid D_i(1)>D_i(0)]
+\end{align*}
+\vspace{-0.6cm}
+
+The IV estimand identifies a LATE: the average treatment effect $Y_i(1)-Y_i(0)$ among \emph{compliers}: those with $1=D_i(1)>D_i(0)=0$\smallskip\pause{}
+\begin{itemize}
+\item Intuitively, IV can't tell us anything about the treatment effects of \emph{never-takers} $D_i(1)=D_i(0)=0$ / \emph{always-takers} $D_i(1)=D_i(0)=1$]\smallskip\pause{}
+\item Monotonicity rules out the presence of \emph{defiers}, with $D_i(1)<D_i(0)$\pause{}
+\end{itemize}\medskip
+\begin{center}$\implies$Different (valid) IVs can identify different LATEs! \end{center}
+\end{frame}
+
+\begin{frame}{What Does This Mean \emph{Practically}?} 
+Two conceptually distinct considerations: \emph{internal} vs. \emph{external} validity\smallskip
+\begin{itemize}
+\item Context of an IV, and who the compliers likely are, may matter\smallskip
+\item Usual ``overidentification'' test logic fails: two valid IVs may have different estimands! (see Kitagawa (2015) for alternative tests)
+\end{itemize}\medskip\pause{}
+In addition to as-good-as-random assignment / exclusion, we may need to worry about monotonicity when we do IV\smallskip
+\begin{itemize}
+\item Sensible in earlier lottery / natural experiment / panel examples \smallskip
+\item Maybe questionable in judge IVs (coming soon!)
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Extensions}
+\vspace{-0.2cm}
+Angrist and Imbens worked out the original LATE theroem for binary $D_i$, discrete $Z_i$, and no included controls\pause{}... but it extends\smallskip\pause{}
+\begin{itemize}
+\item Angrist/Imbens '95: multivalued (ordered) $D_i$, saturated covariates\smallskip
+\item Angrist/Graddy/Imbens '00: continuous $D_i$ (supply/demand setup)\smallskip
+\item Heckman/Vytlicil '05: continuous $Z_i$ (more on this soon)\smallskip
+\item Multiple unordered treatments is harder (e.g. Behaghel et al. 2013)
+\end{itemize}\medskip\pause{}
+Recent discussions highlight importance of including flexible controls\smallskip
+\begin{itemize}
+\item E.g. Sloczy\'{n}ski '20, Borusyak and Hull '21, Mogstad et al. '22\smallskip
+\item If monotonicity only holds conditional on $X_i$, may need $Z_i$-by-$X_i$ interactions (which may lead to many-weak problems...)
+\end{itemize}
 \end{frame}
 
 \section{Characterizing Compliers}
 
+\begin{frame}{Who Are the Compliers?}
+Characterizing the $i$ that make up the IV estimand (w/$D_i(1)>D_i(0)$) is key for understanding internal vs. external validity \smallskip
+\begin{itemize}
+\item Unfortunately we can't identify compliers directly: we only observe $D_i(1)$ (when $Z_i=1$) or $D_i(0)$ (when $Z_i=0$), not both together!
+\end{itemize}\bigskip\pause{}
+It turns out we can still characterize compliers by their outcomes ($Y_i(0)$ and $Y_i(1)$) and other observables $X_i$\smallskip
+\begin{itemize}
+\item Comparing $E[X_i\mid D_i(1)>D_i(0)]$ to $E[X_i]$ can maybe shed light on how $E[Y_i(1)-Y_i(0)\mid D_i(1)>D_i(0)]$ compares to $E[Y_i(1)-Y_i(0)]$
+\end{itemize}
+\end{frame}
+
 \subsection{Outcomes}
 \begin{frame}{Outcomes}
-Stuff about complier outcomes
+Computing $E[Y_i(1)\mid D_i(1)>D_i(0)]$ is surprisingly easy in the IA setup\smallskip
+\begin{itemize}
+\item Define $W_i=Y_iD_i$, and note that this new outcome has potentials with respect to $D_i$ of $W_i(1)=Y_i(1)$ and $W_i(0)=0$\smallskip\pause{}
+\item Thus IV with $W_i$ as the outcome identifies $E[W_i(1)-W_i(0)\mid D_i(1)>D_i(0)]=E[Y_i(1)\mid D_i(1)>D_i(0)]$
+\end{itemize}\medskip\pause{}
+Similar logic shows that IV with $Y_i(1-D_i)$ as the outcome and $1-D_i$ as the treatment identifies $E[Y_i(1)\mid D_i(1)>D_i(0)]$\smallskip
+\begin{itemize}
+\item So easy to do! And extends to covariates / multiple IVs...
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Characterizing Charter Lottery Complier $Y_i(0)$'s}
+\begin{center}
+\includegraphics[scale=0.32]{./lecture_includes/cfx.png}
+\end{center}
+Source: Angrist, Pathak, and Walters (2013)
 \end{frame}
 
 \subsection{Covariates}
+\vspace{-0.5cm}
 \begin{frame}{Covariates}
-Stuff about complier covariates
+For covariates $X_i$ (not affected by $D_i$) we can follow a similar trick:\smallskip
+\begin{itemize}
+\item Either IV'ing $X_iD_i$ on $D_i$ or IV'ing $X_i(1-D_i)$ on $1-D_i$ identifies complier characteristics $E[X_i\mid D_i(1)>D_i(0)]$\smallskip
+\item Shouldn't be very different (implicit balance test); can be averaged
+\end{itemize}\bigskip\pause{}
+Abadie (2003) gives a slicker (but a bit more involved) approach to estimating any function of $(Y_i(0),Y_i(1),X_i)$ for compliers\smallskip
+\begin{itemize}
+\item Involves weighting by $\kappa=1-\frac{D_i(1-Z_i)}{1-E[Z_i\mid W_i]}-\frac{(1-D_i)Z_i}{E[Z_i\mid W_i]}$ where $W_i$ are any necessary ``design controls'' (e.g. lottery risk sets)\smallskip
+\item You can do some really cool stuff with this!
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Black/White Potential Outcomes, Pre-Charter}
+\vspace{-0.5cm}
+\begin{center}
+\includegraphics[scale=0.3]{./lecture_includes/angrist_distribution_4.png}
+\end{center}
+Source: Josh Angrist Nobel Lecture (2021) 
+\end{frame}
+
+\begin{frame}{Black/White Potential Outcomes, Post-Charter}
+\vspace{-0.5cm}
+\begin{center}
+\includegraphics[scale=0.3]{./lecture_includes/angrist_distribution_8.png}
+\end{center}
+Source: Josh Angrist Nobel Lecture (2021) 
 \end{frame}
 
 \section{Marginal Treatment Effects}
 
-\subsection{Potential Outcome Setup}
-\begin{frame}{Potential Outcome Setup}
-Stuff about the potential outcome setup
+\subsection{Continuous Instruments}
+\begin{frame}{Heckman and Vytlicil (2005, 2007, 2010, 2013...)}
+If we have a $Z_i$ that varies continuously, we might learn more about how treatment effects vary with compliance \smallskip
+\begin{itemize}
+\item Different types of $i$ may ``respond'' at different margins of $Z_i$
+\end{itemize}\medskip\pause{}
+Heckman-Vytlicil write $D_i=\mathbf{1}[p(Z_i)\ge U_i]$, with $U_i\mid Z_i\sim U(0,1)$\smallskip
+\begin{itemize}
+\item $p(z)=Pr(D_i=1\mid Z_i=z)$ is the treatment propensity score\smallskip
+\item $U_i$ indexes treatment ``resistance'' (i.e. types of compliers); Vytlacil (2002) shows model is equivalent to IA's monotonicity w/ binary $Z_i$
+\end{itemize}\medskip\pause{}
+Now we can consider how $Y_i(1)-Y_i(0)$ varies continuously with $U_i$ ...
 \end{frame}
 
-\subsection{Identification and Extensions}
-\begin{frame}{Identification and Extensions}
-Stuff about identification and extensions
+\begin{frame}{Doyle (2007): MTEs of Foster Care Removal}
+\vspace{-0.8cm}
+\begin{center}
+\includegraphics[scale=0.3]{./lecture_includes/doyle_mtes.png}
+\end{center}
+\end{frame}
+
+\begin{frame}{Local Instrumental Variables}
+Heckman (2000) shows that MTEs are identified by ``local IV'':\smallskip
+\begin{align*}
+E[Y_i(1)-Y_i(0)\mid U_i=p]=\frac{\partial E[Y_i\mid p(Z_i)=p]}{\partial p}
+\end{align*}
+under natural extensions of Imbens and Angrist (1994)\smallskip\pause{}
+\begin{itemize}
+\item Suggests we flexibly estimate $p(z)=Pr(D_i=1\mid Z_i=z)$, $E[Y_i\mid p(Z_i)]$, and then take the derivative of the latter\smallskip
+\item In practice this is often done parametrically, and with controls
+\end{itemize}
+
+\end{frame}
+
+\subsection{Discrete Instruments}
+\begin{frame}{What if We Don't Have Continuous Instruments?}
+A fascinating recent literature considers intermediate cases of Imbens-Angrist and Heckman-Vytlacil:\smallskip
+\begin{itemize}
+\item Discrete (binary/multivalued) $Z_i$, with parametric/shape restrictions to trace out (or maybe bound) the MTE curve\smallskip
+\item Effectively using a model to ``extrapolate'' from local variation, maybe to identify more policy-relevant parameters
+\end{itemize}\medskip\pause{}
+Some examples: Brinch et al. (2017),  Mogstad et al. (2018), Kline and Walters (2019), Hull (2020), Arnold et al. (2021), Kowalski (2022)\smallskip
+\begin{itemize}
+\item Lots more to do here (especially on the practical side)
+\end{itemize}
+\end{frame}
+
+\begin{frame}{How Parametric ``Heckit'' Models Extrapolate LATEs}
+\vspace{-0.3cm}
+\begin{center}
+\includegraphics[scale=0.4]{./lecture_includes/kline_walters.png}
+\end{center}
+Source: Kline and Walters (2019) 
 \end{frame}
 
 \end{document}

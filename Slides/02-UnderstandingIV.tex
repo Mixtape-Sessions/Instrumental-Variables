@@ -148,7 +148,7 @@ Without appealing to literal randomization, we may credibly argue $Z_i$ is as-go
 \end{itemize}\pause\medskip
 \end{frame}
 
-\begin{frame}{Example}{Quarter-of-birth}
+\begin{frame}{Example}{Quarter-of-Birth}
 Angrist and Krueger (1991) famously estimate labor market returns to schooling with a creative IV: student quarter-of-birth
 
 \begin{itemize}
@@ -162,7 +162,7 @@ Angrist and Krueger (1991) famously estimate labor market returns to schooling w
 
 \begin{frame}{The Quarter-of-Birth Natural Experiment: Visualized}
 
-\vspace{-0.3cm}
+\vspace{-0.5cm}
 \begin{center}
 \includegraphics[scale=0.45]{./lecture_includes/qob1.png}
 \end{center}
@@ -190,7 +190,7 @@ We might also combine IV + difference-in-differences identification
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Example}{School Lottery}
+\begin{frame}{Example}{Charter School Takeovers}
 Abdulkadiroglu et al. (2016) complement their lottery analysis of takeover charters with an instrumented diff-in-diff analysis
 \begin{itemize}
   \item Students enrolled in the ``legacy'' public school were eligible for being ``grandfathered'' into UP, without having to apply to the charter
@@ -221,10 +221,10 @@ Abdulkadiroglu et al. (2016) complement their lottery analysis of takeover chart
 \subsection{Just-Identified IV}
 \begin{frame}{Just-Identified IV}
 
-As you likely know, the general \code{ivregress} command (or its equivalent \code{fixes::feols} in R) allows for controls and multiple treatments / instruments
+Tthe Stata \code{ivregress}/\code{ivreg2} commands (or \code{fixes::feols} in R) allows for controls and multiple treatments / instruments
 \begin{itemize}
   \item When \# treatment = \# instruments, we say the IV is ``just-identified'':
-\end{itemize}\pause\vspace{-0.5cm}
+\end{itemize}\pause\vspace{-0.7cm}
 
 \begin{align*}
 Y_i &=  \beta D_i +\mathbf{W}_i^\prime\boldsymbol{\gamma} +  \varepsilon_i\hspace{0.2cm}\text{(second stage)}\\
@@ -261,7 +261,7 @@ where $\mathbf{Z}_i=[Z_{i1},\dots,Z_{iL}]^\prime$. Reduced form: $Y_i= \mathbf{Z
 
 Validity: $Cov(Z_{i\ell},\varepsilon_i)=0$ for all $\ell$
 \begin{itemize}
-  \item ``Overidentified'' because we could use any $Z_{i\ell}$ to estimate $\beta=\boldsymbol{\rho}_\ell/\boldsymbol{\pi}_\ell$\pause
+  \item ``Overidentified'' b/c we could use any $Z_{i\ell}$ to identify $\beta=\boldsymbol{\rho}_\ell/\boldsymbol{\pi}_\ell$\pause
   \item Relevance: $\boldsymbol{\pi}_\ell\neq 0$ for at least some $\ell$
 \end{itemize}\pause\medskip
 
@@ -276,13 +276,13 @@ Overidentification can yield tests of IV validity
 You'll notice I haven't actually defined 2SLS beyond the simple case
 \begin{itemize}
   \item Before we had $\beta^{IV}=\frac{Cov(Z_i,Y_i)}{Cov(Z_i,D_i)}$ leading to $\widehat\beta^{IV}=\frac{\widehat{Cov}(Z_i,Y_i)}{\widehat{Cov}(Z_i,D_i)}$ 
-  \item General form follows similarly (sample analog), but is notation-heavy
+  \item General form follows similarly (as a sample analog) but is notation-heavy, so we won't go into it here
 \end{itemize}
 \pause
 
 A more useful way to define 2SLS is by a two-step procedure:
 \begin{itemize}
-  \item First regress $D_i$ on all $Z_{i\ell}$ and $W_{ik}$
+  \item First regress $D_i$ on all instruments $Z_{i\ell}$ and controls $W_{ik}$
   \item Then regress $Y_i$ on the ``fitted values'' $\widehat{D}_i$ and controls $W_{ik}$ 
 \end{itemize}
 \pause
@@ -294,21 +294,31 @@ The proof of this follows from some (simple) linear algebra
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Putting the ``2S'' in ``2SLS''}
+\begin{frame}{Avoid Manual 2SLS!}
 
-$$\widehat\beta^{IV}=\frac{\widehat{\rho}^{OLS}}{\widehat{\pi}^{OLS}}$$
-
-\medskip
 Although easy, you should never do such ``manual 2SLS'' yourself!
 \begin{itemize}
-\item Your point estimates will be right, but your SEs won't be!
+\item Your point estimates will be right, but your SEs won't be!\smallskip
+\item Also might forget to include some controls in the second stage, etc
 \end{itemize}
+\bigskip
+Just let Stata/R do everything for you...
+\end{frame}
+
+\begin{frame}{2SLS Done Right }
+
+\vspace{-0.35cm}
+\begin{center}
+\includegraphics[scale=0.5]{./lecture_includes/auto_iv_results.png}
+\end{center}
+
 \end{frame}
 
 \section{Weak and Many Instruments}
 
 \subsection{Weak IV}
 \begin{frame}{Weak Instruments}
+\vspace{-0.2cm}
 
 When running just-identified IV, you should always worry about the ``strength'' of your instrument
 \begin{itemize}
@@ -318,19 +328,20 @@ When running just-identified IV, you should always worry about the ``strength'' 
 
 If $\pi^{OLS}$ is small relative to its standard error, the IV is ``weak''
 \begin{itemize}
-  \item Typically use the rule-of-thumb of $F<10$ (Staiger and Stock 1997)
-  \item In this case the second-stage SEs will be large and the 2SLS estimate will tend to be biased towards the corresponding OLS estimate
+  \item Typically use the rule-of-thumb of $\bgPictonBlue{F}<10$ (Staiger and Stock 1997)
+  \item In this case the second-stage SEs will be large and the 2SLS estimate will tend to be biased towards the corresponding OLS
 \end{itemize}\pause
 
 Much made of this over the years, but Angrist and Koles\'{a}r (2022) argue recently that we shouldn't worry too much
 \begin{itemize}
   \item The SE increase tends to be large enough to ``cover up'' the bias
-  \item Just-id. 2SLS is ``approximately median-unbiased'' (as it is LIML)
+  \item Just-id. 2SLS is ``approximately median-unbiased''
 \end{itemize}
 
 \end{frame}
 
 \begin{frame}{Weak Instruments: Visualized}
+\vspace{-0.2cm}
 Monte Carlo: $Y_i=\varepsilon_i$, $D_i=\Pi Z_i+\eta_i$: $\Pi=Var(\varepsilon_i)=Var(\eta_i)=1$
 \begin{center}
 \includegraphics[scale=0.45]{./lecture_includes/strongpi.png}
@@ -339,6 +350,7 @@ Monte Carlo: $Y_i=\varepsilon_i$, $D_i=\Pi Z_i+\eta_i$: $\Pi=Var(\varepsilon_i)=
 \end{frame}
 
 \begin{frame}{Weak Instruments: Visualized}
+\vspace{-0.2cm}
 Monte Carlo: $Y_i=\varepsilon_i$, $D_i=\Pi Z_i+\eta_i$: $\Pi=0.1$ (Weaker)
 \begin{center}
 \includegraphics[scale=0.35]{./lecture_includes/medpi.png}
@@ -347,6 +359,7 @@ Monte Carlo: $Y_i=\varepsilon_i$, $D_i=\Pi Z_i+\eta_i$: $\Pi=0.1$ (Weaker)
 \end{frame}
 
 \begin{frame}{Weak Instruments: Visualized}
+\vspace{-0.2cm}
 Monte Carlo: $Y_i=\varepsilon_i$, $D_i=\Pi Z_i+\eta_i$: $\Pi=0.01$ (Very Weak)
 \begin{center}
 \includegraphics[scale=0.35]{./lecture_includes/weakpi.png}
@@ -378,6 +391,7 @@ As we'll see, this bias is especially relevant in judge IV designs\smallskip
 \end{frame}
 
 \begin{frame}{Weak and Many Instruments VIII}
+\vspace{-0.2cm}
 Monte Carlo: $Y_i=\varepsilon_i$, $X_i=\Pi Z_{i1}+\eta_i$: IV with one $Z_{i1}$
 \begin{center}
 \includegraphics[scale=0.35]{./lecture_includes/fewz.png}
@@ -386,6 +400,7 @@ Monte Carlo: $Y_i=\varepsilon_i$, $X_i=\Pi Z_{i1}+\eta_i$: IV with one $Z_{i1}$
 \end{frame}
 
 \begin{frame}{Weak and Many Instruments IX}
+\vspace{-0.2cm}
 Monte Carlo: $Y_i=\varepsilon_i$, $X_i=\Pi Z_{i1}+\eta_i$: IV with ten $Z_{ij}$
 \begin{center}
 \includegraphics[scale=0.35]{./lecture_includes/somez.png}
@@ -394,6 +409,7 @@ Monte Carlo: $Y_i=\varepsilon_i$, $X_i=\Pi Z_{i1}+\eta_i$: IV with ten $Z_{ij}$
 \end{frame}
 
 \begin{frame}{Weak and Many Instruments X}
+\vspace{-0.2cm}
 Monte Carlo: $Y_i=\varepsilon_i$, $X_i=\Pi Z_{i1}+\eta_i$: IV with 100 $Z_{ij}$
 \begin{center}
 \includegraphics[scale=0.35]{./lecture_includes/manyz.png}
@@ -401,4 +417,20 @@ Monte Carlo: $Y_i=\varepsilon_i$, $X_i=\Pi Z_{i1}+\eta_i$: IV with 100 $Z_{ij}$
 
 \end{frame}
 
+\begin{frame}{What to Do?}
+Check your F's after every IV regression\smallskip
+\begin{itemize}
+\item Staiger-Stock rule-of-thumb ($F>10$) still seems widely held\smallskip
+\item See Lee et al. (2020) for a recent alternative approach
+\end{itemize}
+\bigskip
+
+If your F is small, some things to consider:\smallskip
+\begin{itemize}
+\item Is there a different instrument that's stronger?\smallskip
+\item Is there a better functional form for the instrument you have?\smallskip
+\item Do interactions with covariates help? (note: beware many-weak!)\smallskip
+\item Does changing the covariate set help? (note: beware invalidity!)
+\end{itemize}
+\end{frame}
 \end{document}

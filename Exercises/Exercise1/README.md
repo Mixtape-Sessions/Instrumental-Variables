@@ -1,6 +1,6 @@
 # Mixtape IV Workshop: Coding Lab 1
 
-This lab will get your IV hands dirty with data from the Angrist and Krueger (1991) quarter-of-birth study. To start, load the `angrist_krueger_91.dta` data file into Stata or R (for R, you can use the package `haven` to help with this). This is a subset of the original study data, for one cohort (men born in 1940, with earnings measured in 1980).
+This lab will get your IV hands dirty with data from the Angrist and Krueger (1991) quarter-of-birth study. To start, load the `angrist_krueger.dta` data file into Stata or R (for R, you can use the package `haven` to help with this). This is a subset of the original study data, for one cohort (men born in 1940, with earnings measured in 1980).
 
 1. Estimate the bivariate statistical relationship between log wages (`lwage`) and completed years of schooling (`educ`) using OLS. Report your coefficient and robust standard error. Visualize this relationship with a simple graph of your choice.
 

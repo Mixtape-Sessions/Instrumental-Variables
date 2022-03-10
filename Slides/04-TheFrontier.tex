@@ -12,13 +12,95 @@
 
 \subsection{Approach}
 \begin{frame}{Approach}
-How judge IV works
+\vspace{-0.2cm}
+A judge (or examiner) IV design leverages the ideosyncratic assignment of individuals to a set of decision-makers\smallskip
+\begin{itemize}
+\item Kling (2006): sentencing judges\smallskip
+\item Doyle (2007): foster care investigators\smallskip
+\item Mayestas et al. (2013): SSDI benefit examiners\smallskip
+\item Doyle et al. (2015): ambulance companies
+\end{itemize}\bigskip\pause{}
+The typical approach is to IV a treatment $D_i$ with a measure of the ``leniency'' $E[D_i\mid Z_{i}]$ of one's assigned judge $Z_i=\in\{1,\dots,J\}$\smallskip
+\begin{itemize}
+\item E.g. a leave-one-out average, $\hat{L}_i=\frac{1}{|i^\prime\neq i,Z_{i^\prime}=Z_i|}\sum_{i^\prime \neq i,Z_{i^\prime}=Z_i}D_i$
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Agan et al. (2021) ``Misdemeanor Prosecution''}
+\begin{center}
+\includegraphics[scale=0.55]{./lecture_includes/agan_FS.png}
+\end{center}
+\end{frame}
+
+\begin{frame}{Agan et al. (2021) ``Misdemeanor Prosecution''}
+\vspace{-0.3cm}
+\begin{center}
+\includegraphics[scale=0.45]{./lecture_includes/agan_balance.png}
+\end{center}
+\end{frame}
+
+\begin{frame}{Agan et al. (2021) ``Misdemeanor Prosecution''}
+\vspace{-0.3cm}
+\begin{center}
+\includegraphics[scale=0.45]{./lecture_includes/agan_SS.png}
+\end{center}
 \end{frame}
 
 \subsection{Cautions}
-\begin{frame}{Cautions}
-Judge IV cautions
+\begin{frame}{Caution: Monotonicity}
+``Strict'' first-stage monotonicity requires judges to have a common ordering of individuals for treatment\smallskip
+\begin{itemize}
+\item E.g. no differences in ``skill'' at identifying appropriate cases
+\end{itemize}\medskip\pause{}
+Imbens and Angrist (\& Ridder) saw this coming in 1994! 
+\begin{center}
+\includegraphics[scale=0.85]{./lecture_includes/imbens_angrist_judges.png}
+\end{center}
 \end{frame}
+
+\begin{frame}{Monotonicity Solutions}
+Frandsen et al. (2019) formalize a weaker ``average monotonicity'' condition: intuitively, that skill differences are uncorrelated with TEs\smallskip
+\begin{itemize}
+\item Similar to de Chaisemartin (2017) ``tolerating defiance''\smallskip
+\item Also propose non-parametric tests of monotonicity + exclusion (similar to Kitagawa (2015), but with multiple IVs + controls)
+\end{itemize}\medskip\pause{}
+
+Other tests include checking whether leniency has the same first stage in different subgroups (Norris, 2021)\smallskip
+\begin{itemize}
+\item Another solution is to parameterize variation in judge skill and estimate it jointly with TEs (Chan et al. 2021; Arnold et al. 2021)
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Caution: Exclusion}
+``Strict'' exclusion requires judges to only affect the outcome through one treatment channel\smallskip
+\begin{itemize}
+\item E.g. a judge more likely to sentence a defendant to jail does not differentially change sentence conditions
+\end{itemize}\medskip\pause{}
+Like monotonicity, this can be weakened to an ``on average'' condition\medskip
+\begin{itemize}
+\item Koles\'{a}r et al. (2015): exclusion restriction violations are uncorrelated with leniency variation (see also Angrist et al. 2021)\smallskip
+\item Need many judges for a ``judge-level law of large numbers'' to kick in
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Adding Treatment Channels}
+Of course if multiple potential treatment channels are observed they can be included + instrumented by judges\smallskip
+\begin{itemize}
+\item See Autor/Maestas/Mullen/Strand (2017), which adds a decision-time treatment to Maestas et al. (20913)\smallskip
+\item Two instruments: examiner leniency and (leave-out) average examiner decision time
+\end{itemize}\medskip\pause{}
+Caution though: IV with multiple treatments can be difficult to interpret in a LATE framework (maybe OK as a robustness check)\smallskip
+\begin{itemize}
+\item See Kirkeboen et al. (2016), Kline and Walters ()
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Caution: Leniency Estimation}
+stuff on leniency estimation
+\end{frame}
+
 
 \section{Shift-Share IV}
 

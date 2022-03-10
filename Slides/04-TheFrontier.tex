@@ -87,7 +87,7 @@ Like monotonicity, this can be weakened to an ``on average'' condition\medskip
 \begin{frame}{Adding Treatment Channels}
 Of course if multiple potential treatment channels are observed they can be included + instrumented by judges\smallskip
 \begin{itemize}
-\item See Autor/Maestas/Mullen/Strand (2017), which adds a decision-time treatment to Maestas et al. (20913)\smallskip
+\item See Autor/Maestas/Mullen/Strand (2017), which adds a decision-time treatment to Maestas et al. (2013)\smallskip
 \item Two instruments: examiner leniency and (leave-out) average examiner decision time
 \end{itemize}\medskip\pause{}
 Careful though: IV with multiple treatments can be difficult to interpret in a LATE framework (maybe OK as a robustness check)\smallskip
@@ -163,7 +163,7 @@ Source: Goldsmith-Pinkham et al. (2020)
 \end{frame}
 
 \begin{frame}{Exogenous Shocks}
-Borusyak et al. (2022) consider the shocks $g_n$ as exogenous (quasi-randomly assigned + excludable), conditional on the shares\smallskip
+Borusyak et al. (2022) consider the shocks $g_n$ as exogenous,  (quasi-randomly assigned + excludable), conditional on the shares\smallskip
 \begin{itemize}
 \item E.g. different industries saw higher/lower import growth from China for reasons unrelated to local U.S. employment trends\smallskip
 \item Need a ``shock-level law of large numbers'' (i.e. many shocks)
@@ -171,7 +171,7 @@ Borusyak et al. (2022) consider the shocks $g_n$ as exogenous (quasi-randomly as
 
 They propose tools to test for shock exogeneity (e.g. balance/ pre-trend checks) and quantify the extent of identifying variation \smallskip
 \begin{itemize}
-\item No overidentifying restrictions: a single set of $g_1,\dots,g_N$ shocks \smallskip
+\item No overidentifying restrictions: a single instrument $g_n$, as if we were running an ``industry-level'' IV regression \smallskip
 \item Also show how to relax exogeneity to hold conditional on some observed shock-level confounders
 \end{itemize}
 
@@ -254,7 +254,7 @@ De Chaisemartin and D'Haultfoeuille propose an alternative ``fuzzy difference-in
 \begin{frame}{The Recent Diff-in-Diff Literature}
 You may have noticed there's been, uh, a lot going on with DD recently\smallskip
 \begin{itemize}
-\item Goodman-Bacon, Sun and Abraham, Callaway and Sant'Anna, Borusyak/Jaraval/Spiess, de Chaisemartin and D'Haultfoeuille ...\smallskip
+\item Goodman-Bacon, Sun and Abraham, Callaway and Sant'Anna, Borusyak/Jaravel/Spiess, de Chaisemartin and D'Haultfoeuille ...\smallskip
 \item As far as I can tell most/all of this analysis is about ``reduced form'' difference-in-differences
 \end{itemize}\medskip\pause{}
 My guess is these problems only get worse with IV (work to be done!)\smallskip
@@ -289,11 +289,11 @@ Consider a instrument $Z_i=f_i(g;s)$ for some known mapping $f_i(\cdot)$ of exog
 $\mu_i$ is measured by taking a stand on the shock \emph{assignment process}\smallskip\pause{}
 \begin{enumerate}
 \item Specify \emph{counterfactual} shocks $\tilde{g}^{(1)},\dots,\tilde{g}^{(K)}$ which were as likely to have occured (by, e.g., permuting the rows of $g$)\smallskip\pause{}
-\item Recompute $Z_i^{(1)},\dots,Z_i^{(K)}$ for each observation $i$\smallskip\pause{}
+\item Recompute $Z_i^{(1)},\dots,Z_i^{(K)}$ for each observation $i$: $Z_i^{(k)}=f_i(\tilde{g}^{(k)};s)$\smallskip\pause{}
 \item Average the counterfactual instruments for each $i$: $\mu_i=\frac{1}{K}\sum_k Z_i^{(k)}$
 \end{enumerate}\medskip\pause{}
 
-Besides recentering, $\mu_i$ can also be directly controlled for
+Besides recentering, $\mu_i$ can also be controlled for with the original $Z_i$
 
 \end{frame}
 

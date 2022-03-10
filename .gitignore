@@ -44,3 +44,7 @@
 *.synctex.gz
 *.synctex.gz(busy)
 *.pdfsync
+
+
+## Word/Ppt Temp files
+**/~$*

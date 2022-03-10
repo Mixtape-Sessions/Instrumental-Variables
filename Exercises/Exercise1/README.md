@@ -16,7 +16,31 @@ This lab will get your IV hands dirty with data from the Angrist and Krueger (19
 
 3. Estimate the average log wages and completed years of schooling for individuals who are and are not born in the first quarter. Check that you can get the 2SLS estimate in 2 manually from these numbers, using the Wald IV formula:
 
-  *2SLS Estimate* = (*E[Y | Z = 1]* - *E[Y | Z = 0]*) / (*E[D | Z = 1]* - *E[D | Z = 0]*) 
+<table class="tg">
+<tbody>
+  <tr>
+    <td></td>
+    <td>E[Y | Z = 1]:</td>
+    <td>-</td>
+    <td>E[Y | Z = 0]:</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>2SLS Estimate = </td>
+    <td colspan="3">----------------------------------------------------------------------------</td>
+    <td>=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>E[D | Z = 1]:</td>
+    <td>-</td>
+    <td>E[D | Z = 0]:</td>
+    <td></td>
+  </tr>
+</tbody>
+</table>
+
+<br/>
 
 4. Add indicators for being born in the second and third quarter of the year as instruments to your specification in 2. Report your coefficient and robust standard error. What interesting things do you notice this vs. the answer in 1?
 

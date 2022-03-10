@@ -10,8 +10,7 @@ library(fixest)
 library(SteinIV)
 
 # ---- Setup Data --------------------------------------------------------------
-data <- haven::read_dta("https://github.com/Mixtape-Sessions/Instrumental-Variables/blob/main/Data/stevenson.dta?raw=true")
-df <- read_dta("~/Desktop/Instrumental-Variables/Data/stevenson.dta")
+df <- read_dta("https://github.com/Mixtape-Sessions/Instrumental-Variables/blob/main/Data/stevenson.dta?raw=true")
 setDT(df)
 df <- df[black == 1, ]
 

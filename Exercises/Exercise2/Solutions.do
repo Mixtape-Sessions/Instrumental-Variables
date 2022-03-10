@@ -30,7 +30,7 @@ reghdfe prior_felChar more_lenient, vce(robust) absorb(bailDate)
 reghdfe guilt jail3, absorb(bailDate) vce(robust)
 ivreghdfe guilt (jail3=more_lenient), absorb(bailDate) r
  
-* Estimate complier Y0 and compare to overall E[Y|D=0]
+/* Estimate complier Y0 and compare to overall E[Y|D=0] */
 gen Y_omD=guilt*(1-jail3)
 gen omD=1-jail3
 ivreghdfe Y_omD (omD=more_lenient), absorb(bailDate) r

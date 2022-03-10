@@ -83,7 +83,7 @@ Confusingly, old-school econometrics texts sometimes refer to $Cov(Z_i,\varepsil
 
 \begin{frame}{Where do IVs Come From?}{1. True Lotteries}
 
-One sure-fire way to ensure that a $Z_i$ is as-good-as-randomly assigned is... \pause to randomly assign it!\pause
+One sure-fire way to ensure that $Z_i$ is as-good-as-randomly assigned is... \pause to randomly assign it!\pause
 
 \begin{itemize}
   \item Some of the best IVs come from lotteries, either run by the researcher (e.g. an RCT) or so-called ``natural experiments''
@@ -121,7 +121,7 @@ We leverage an institutional feature of charters: \emph{admission lotteries}
 
   \item We need to control for lottery fixed effects (``risk sets'') to make $Z_i$ as-good-as-randomly assigned -- more on this soon
 \end{itemize}
-\pause
+\pause\medskip
 
 We study a particular charter (UP Academy), which is ``takeover''
 \begin{itemize}
@@ -145,7 +145,7 @@ Without appealing to literal randomization, we may credibly argue $Z_i$ is as-go
   \item Such ``natural experiments'' rely on a selection-on-observables argument (for $Z_i$, instead $D_i$)
 
   \item Still worry about exclusion: $Z_i$ cannot affect $Y_i$ except through $D_i$
-\end{itemize}\pause\medskip
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Example}{Quarter-of-Birth}
@@ -242,7 +242,7 @@ Same identification logic as before:
   \item Relevance: $\pi\neq 0$, so $Z_i$ and $D_i$ are correlated controlling for $\mathbf{W}_i$
 \end{itemize}\pause\medskip
 
-IV is still ``reduced form over first stage'': ($\beta=\rho/\pi$)\pause\vspace{0.1cm}
+IV is still ``reduced form over first stage'': ($\beta^{IV}=\rho^{OLS}/\pi^{OLS}$)\pause\vspace{0.1cm}
 \begin{itemize}
   \item Can use Frisch-Waugh-Lovell to ``partial out'' $\mathbf{W}_i$ from $Y_i$, $X_i$, $D_i$, \\ and so get back to an IV regression without controls
 \end{itemize}

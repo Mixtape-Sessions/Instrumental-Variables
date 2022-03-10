@@ -38,41 +38,45 @@
 \headcommand {\beamer@framepages {24}{26}}
 \headcommand {\slideentry {2}{2}{4}{27/28}{Regression Identification and Endogeneity}{0}}
 \headcommand {\beamer@framepages {27}{28}}
-\headcommand {\slideentry {2}{2}{5}{29/31}{Regression Identification and Endogeneity}{0}}
-\headcommand {\beamer@framepages {29}{31}}
-\headcommand {\slideentry {2}{2}{6}{32/32}{Regression Identification and Endogeneity}{0}}
+\headcommand {\slideentry {2}{2}{5}{29/30}{Regression Identification and Endogeneity}{0}}
+\headcommand {\beamer@framepages {29}{30}}
+\headcommand {\slideentry {2}{2}{6}{31/31}{Regression Identification and Endogeneity}{0}}
+\headcommand {\beamer@framepages {31}{31}}
+\headcommand {\slideentry {2}{2}{7}{32/32}{Regression Identification and Endogeneity}{0}}
 \headcommand {\beamer@framepages {32}{32}}
-\headcommand {\slideentry {2}{2}{7}{33/33}{Regression Identification and Endogeneity}{0}}
+\headcommand {\slideentry {2}{2}{8}{33/33}{Regression Identification and Endogeneity}{0}}
 \headcommand {\beamer@framepages {33}{33}}
-\headcommand {\slideentry {2}{2}{8}{34/34}{Regression Identification and Endogeneity}{0}}
-\headcommand {\beamer@framepages {34}{34}}
-\headcommand {\slideentry {2}{2}{9}{35/37}{Regression Identification and Endogeneity}{0}}
-\headcommand {\beamer@framepages {35}{37}}
-\headcommand {\slideentry {2}{2}{10}{38/38}{Regression Identification and Endogeneity}{0}}
+\headcommand {\slideentry {2}{2}{9}{34/36}{Regression Identification and Endogeneity}{0}}
+\headcommand {\beamer@framepages {34}{36}}
+\headcommand {\slideentry {2}{2}{10}{37/37}{Regression Identification and Endogeneity}{0}}
+\headcommand {\beamer@framepages {37}{37}}
+\headcommand {\beamer@sectionpages {14}{37}}
+\headcommand {\beamer@subsectionpages {20}{37}}
+\headcommand {\sectionentry {3}{Intro to IV}{38}{Intro to IV}{0}}
+\headcommand {\slideentry {3}{0}{1}{38/38}{}{0}}
 \headcommand {\beamer@framepages {38}{38}}
-\headcommand {\beamer@sectionpages {14}{38}}
-\headcommand {\beamer@subsectionpages {20}{38}}
-\headcommand {\sectionentry {3}{Intro to IV}{39}{Intro to IV}{0}}
-\headcommand {\slideentry {3}{0}{1}{39/39}{}{0}}
-\headcommand {\beamer@framepages {39}{39}}
-\headcommand {\beamer@subsectionpages {39}{39}}
-\headcommand {\beamer@subsectionentry {0}{3}{1}{40}{Instrument Validity and Relevance}}
-\headcommand {\slideentry {3}{1}{1}{40/44}{Instrument Validity and Relevance}{0}}
-\headcommand {\beamer@framepages {40}{44}}
-\headcommand {\slideentry {3}{1}{2}{45/47}{Instrument Validity and Relevance}{0}}
-\headcommand {\beamer@framepages {45}{47}}
-\headcommand {\beamer@subsectionpages {40}{47}}
-\headcommand {\beamer@subsectionentry {0}{3}{2}{48}{The 2SLS Estimator}}
-\headcommand {\slideentry {3}{2}{1}{48/50}{The 2SLS Estimator}{0}}
-\headcommand {\beamer@framepages {48}{50}}
-\headcommand {\slideentry {3}{2}{2}{51/53}{The 2SLS Estimator}{0}}
-\headcommand {\beamer@framepages {51}{53}}
-\headcommand {\slideentry {3}{2}{3}{54/54}{The 2SLS Estimator}{0}}
-\headcommand {\beamer@framepages {54}{54}}
-\headcommand {\slideentry {3}{2}{4}{55/55}{The 2SLS Estimator}{0}}
-\headcommand {\beamer@framepages {55}{55}}
-\headcommand {\beamer@partpages {1}{55}}
-\headcommand {\beamer@subsectionpages {48}{55}}
-\headcommand {\beamer@sectionpages {39}{55}}
-\headcommand {\beamer@documentpages {55}}
-\headcommand {\gdef \inserttotalframenumber {25}}
+\headcommand {\beamer@subsectionpages {38}{38}}
+\headcommand {\beamer@subsectionentry {0}{3}{1}{39}{Instrument Validity and Relevance}}
+\headcommand {\slideentry {3}{1}{1}{39/44}{Instrument Validity and Relevance}{0}}
+\headcommand {\beamer@framepages {39}{44}}
+\headcommand {\slideentry {3}{1}{2}{45/46}{Instrument Validity and Relevance}{0}}
+\headcommand {\beamer@framepages {45}{46}}
+\headcommand {\slideentry {3}{1}{3}{47/50}{Instrument Validity and Relevance}{0}}
+\headcommand {\beamer@framepages {47}{50}}
+\headcommand {\slideentry {3}{1}{4}{51/51}{Instrument Validity and Relevance}{0}}
+\headcommand {\beamer@framepages {51}{51}}
+\headcommand {\beamer@subsectionpages {39}{51}}
+\headcommand {\beamer@subsectionentry {0}{3}{2}{52}{The 2SLS Estimator}}
+\headcommand {\slideentry {3}{2}{1}{52/54}{The 2SLS Estimator}{0}}
+\headcommand {\beamer@framepages {52}{54}}
+\headcommand {\slideentry {3}{2}{2}{55/57}{The 2SLS Estimator}{0}}
+\headcommand {\beamer@framepages {55}{57}}
+\headcommand {\slideentry {3}{2}{3}{58/58}{The 2SLS Estimator}{0}}
+\headcommand {\beamer@framepages {58}{58}}
+\headcommand {\slideentry {3}{2}{4}{59/59}{The 2SLS Estimator}{0}}
+\headcommand {\beamer@framepages {59}{59}}
+\headcommand {\beamer@partpages {1}{59}}
+\headcommand {\beamer@subsectionpages {52}{59}}
+\headcommand {\beamer@sectionpages {38}{59}}
+\headcommand {\beamer@documentpages {59}}
+\headcommand {\gdef \inserttotalframenumber {27}}

@@ -69,7 +69,7 @@ Three distinct objects (though not always clearly distinguished) \pause\medskip
     \item They set the target for an empirical analysis: what we want to know
   \end{itemize}\pause
   
-  \item \bgPictonBlue{Estimands} are functions of the population distribution of observable data
+  \item \bgPictonBlue{Estimands} are functions of the population data distribution 
   \begin{itemize}\itemsep0em
     \item E.g. a difference in means or ratio of population regression coef's
     \item Make assumptions to link parameters \& estimands (``identification'')
@@ -85,7 +85,7 @@ Three distinct objects (though not always clearly distinguished) \pause\medskip
 }
 \end{frame}
 
-\begin{frame}{The IV Solution}
+\begin{frame}{The Lay of the Land}
   \begin{adjustbox}{width = 0.9\textwidth, center}
     \begin{tikzpicture}
       \node[violet-red] (theory) at (-3.5, 1.25) {Economic Theory};
@@ -262,7 +262,7 @@ We then have identification:\vspace{-0.3cm}
 \begin{align*}
   Cov(Z_i,Y_i) &= Cov(Z_i,\alpha + \violetRed{\beta} D_i+\varepsilon_i) \pause = \violetRed{\beta} Cov(Z_i,D_i)+Cov(Z_i,\varepsilon_i) \\ \pause
   &= \violetRed{\beta} Cov(Z_i,D_i) \pause \implies \violetRed{\beta} = \frac{Cov(Z_i,Y_i)}{Cov(Z_i,D_i)}
-\end{align*}\pause\vspace{-0.3cm}
+\end{align*}
 
 \end{frame}
 
@@ -287,7 +287,7 @@ where $\pictonBlue{\rho^{OLS}}$ and $\pictonBlue{\pi^{OLS}}$ are two OLS estiman
 \begin{align*}
 Y_i &= \kappa^{OLS} + \pictonBlue{\rho^{OLS}} Z_i + V_i \hspace{0.2cm}\text{ ``reduced form''}\\
 D_i &= \mu^{OLS} + \pictonBlue{\pi^{OLS}} Z_i + W_i\hspace{0.2cm}\text{ ``first stage''}
-\end{align*}\vspace{-0.5cm}\pause
+\end{align*}
 
 \end{frame}
 

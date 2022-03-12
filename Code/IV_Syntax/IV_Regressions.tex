@@ -1,0 +1,67 @@
+\documentclass{beamer}
+
+\input{preamble.tex}
+
+\begin{document}
+
+
+\begin{frame}{\code{Stata}}{\code{ivreg2} package}
+  \begin{adjustbox}{width = 0.9\textwidth, center}
+
+    \begin{tikzpicture}
+      \node[] (command) at (0, 0) { \code{ivreg2} };
+      \node[right=0em of command] (y) { \code{y} };
+      \node[right=0em of y, pin={[pin edge={<-}, scale=0.75]90:\text{Exogenous}}] (covs) { \sun{\code{covs}} };
+      \node[right=0em of covs] (open) { \code{(} };
+      \node[right=-0.5em of open, pin={[pin edge={<-}, scale=0.75]270:\text{Endogenous}}] (endo) { \electricViolet{\code{endo}} };
+      \node[right=0em of endo] (equals) { \code{=} };
+      \node[right=0em of equals, pin={[pin edge={<-}, scale=0.75]90:\text{Instruments}}] (inst) { \pictonBlue{\code{inst}} };
+      \node[right=-0.5em of inst] (closed) { \code{)} };
+      \node[right=0em of closed] (robust) { \code{, r} };
+    \end{tikzpicture}
+  \end{adjustbox}
+
+\end{frame}
+
+\begin{frame}{\code{Stata}}{\code{ivreghdfe} package}
+  \begin{adjustbox}{width = 0.9\textwidth, center}
+
+    \begin{tikzpicture}
+      \node[] (command) at (0, 0) { \code{ivreghdfe} };
+      \node[right=0em of command] (y) { \code{y} };
+      \node[right=0em of y, pin={[pin edge={<-}, scale=0.75]90:\text{Exogenous}}] (covs) { \sun{\code{covs}} };
+      \node[right=0em of covs] (open) { \code{(} };
+      \node[right=-0.5em of open, pin={[pin edge={<-}, scale=0.75]270:\text{Endogenous}}] (endo) { \electricViolet{\code{endo}} };
+      \node[right=0em of endo] (equals) { \code{=} };
+      \node[right=0em of equals, pin={[pin edge={<-}, scale=0.75]90:\text{Instruments}}] (inst) { \pictonBlue{\code{inst}} };
+      \node[right=-0.5em of inst] (closed) { \code{)} };
+      \node[right=0em of closed] (robust) { \code{, r absorb(fes)} };
+    \end{tikzpicture}
+  \end{adjustbox}
+
+\end{frame}
+  
+\begin{frame}{\code{R}}{\code{fixest} package}
+
+  \begin{adjustbox}{width = 0.9\textwidth, center}
+    \begin{tikzpicture}
+      \node[] (command) at (0, 0) { \code{feols(} };
+      \node[right=-0.5em of command] (y) { \code{y \texttildelow} };
+      \node[right=0em of y, pin={[pin edge={<-}, scale=0.75]90:\text{Exogenous}}] (covs) { \sun{\code{covs}} };
+      \node[right=0em of covs] (feBar) { \code{|} };
+      \node[right=0em of feBar, pin={[pin edge={<-}, scale=0.75]270:\text{Fixed Effects}}] (fes) { \code{fes} };
+      \node[right=0em of fes] (ivBar) { \code{|} };
+      \node[right=0em of ivBar, pin={[pin edge={<-}, scale=0.75]90:\text{Endogenous}}] (endo) { \electricViolet{\code{endo}} };
+      \node[right=-0.5em of endo] (equals) { \code{ \texttildelow } };
+      \node[right=0em of equals, pin={[pin edge={<-}, scale=0.75]270:\text{Instruments}}] (inst) { \pictonBlue{\code{inst}} };
+      \node[right=0em of inst] (data) { \code{, df, vcov="hc1"} };
+      \node[right=-0.5em of data] (command_closed) { \code{)}};
+    \end{tikzpicture}
+  \end{adjustbox}
+
+\end{frame}
+
+
+  
+
+\end{document}

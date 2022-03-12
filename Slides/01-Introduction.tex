@@ -9,7 +9,6 @@
 \section{Introductions}
 
 \subsection{Who Am I?}
-\subsection{Who Am I?}
 \begin{frame}{Who Am I?}
 
 Groos Family Assistant Professor of Economics, Brown University\pause
@@ -29,21 +28,21 @@ A constant student of IV (and econometrics more generally)
 \subsection{What is This Course?}
 \begin{frame}{What is This Course?}
 
-A one-day intensive on IV, with focus on recent practical advances \pause
+A one-day intensive on IV, focusing on recent practical advances \pause
 
 \begin{itemize}
-  \item Far from comprehensive; stay tuned for more ``mixtape tracks'' that take deeper dives on particular topics (judge IV, etc)
+  \item Far from comprehensive --- stay tuned for more ``mixtape tracks'' that take deeper dives on particular topics (judge IV, shift-share, etc)
   \item Emphasis on \emph{practical}: IV is meant to be used, not just studied!
 \end{itemize}\pause\medskip
 
-Four one-hour lectures: from IV basics to recent topics\pause
+Four one-hour lectures: from IV basics to recent topics
 
 \begin{itemize}
   \item Please ask questions in the Discord chat!
   \item I will try to stick to the schedule but may improvise slightly
 \end{itemize}\pause\medskip
 
-Two 75-minute coding labs, applying what we've learned\pause
+Two 75-minute coding labs, applying what we've learned
 \begin{itemize}
   \item I will be live-coding in Stata, but R code will also be available
   \item Goal: demonstrate both methods \& how I think about applying them
@@ -65,7 +64,7 @@ Three distinct objects (though not always clearly distinguished) \pause\medskip
 \begin{itemize}
   \item \bgVioletRed{Parameters} come from models of how observed data are generated
   \begin{itemize}\itemsep0em
-    \item E.g. a structural supply/demand model or potential outcomes
+    \item E.g. a structural supply/demand elasticity, an ATE, or a CEF
     \item They set the target for an empirical analysis: what we want to know
   \end{itemize}\pause
   
@@ -111,7 +110,7 @@ Three distinct objects (though not always clearly distinguished) \pause\medskip
 \end{frame}
 
 \subsection{Regression Identification and Endogeneity}
-\begin{frame}{Let's Get Concrete}
+\begin{frame}{Let's Get Specific}
 Human capital theory (e.g. Becker, 1957) tells us that taking one-day IV intensives are likely to boost later-life productivity\pause
 \begin{itemize}
   \item Parameter: returns to taking this class $\violetRed{\beta}$, measured in some outcome $Y_i$ (e.g. lifetime top-5 pubs / earnings / twitter followers)
@@ -323,10 +322,10 @@ We will soon consider extensions of all of this, with controls / multiple instru
 
 Angrist famously used Vietnam-era draft eligibility as an instrument to estimate the earnings effects of military service 
 \begin{itemize}
-\item Let $Z_i$ be an indicator for draft eligibility, $D_i$ be an indicator for military service, and $Y_i$ measure later-life earnings
+\item Let $Z_i\in\{0,1\}$ be an indicator for draft eligibility, $D_i\in\{0,1\}$ be an indicator for military service, and $Y_i$ measure later-life earnings
 \end{itemize}\medskip\pause
 
-Here $\pictonBlue{\beta^{IV}} = \frac{Cov(Z_i,Y_i)/Var(Z_i)}{Cov(Z_i,D_i)/Var(Z_i)} = \frac{E[Y_i\mid Z_i=1]-E[Y_i\mid Z_i=0]}{E[D_i\mid Z_i=1]-E[D_i\mid Z_i=0]}$ has a special name, because $Z_i$ is binary: the \bgPictonBlue{Wald estimand}
+Here $\pictonBlue{\beta^{IV}} = \frac{Cov(Z_i,Y_i)/Var(Z_i)}{Cov(Z_i,D_i)/Var(Z_i)} = \frac{E[Y_i\mid Z_i=1]-E[Y_i\mid Z_i=0]}{E[D_i\mid Z_i=1]-E[D_i\mid Z_i=0]}$ has a special name, because $Z_i$ is binary: the \bgPictonBlue{Wald estimand}\pause{}
 \begin{itemize}
 \item First stage $E[D_i\mid Z_i=1]-E[D_i\mid Z_i=0]$: effect of eligibility on the \emph{probability} of military service (b/c $D_i$ is binary)
 \item Reduced form $E[Y_i\mid Z_i=1]-E[Y_i\mid Z_i=0]$: effect of eligibility on adult earnings (measured in 1971, 1981...)

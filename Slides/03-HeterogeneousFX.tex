@@ -15,7 +15,7 @@
 So far we have implicitly been considering models w/ constant effects
 \begin{itemize}
 \item $Y_i=\alpha+\beta D_i+\varepsilon_i$ implies $\partial Y/\partial D = \beta$ for all observations $i$\smallskip
-\item What if this model is \emph{misspecified}? I.e. $Y_i=\alpha+\beta_i D_i+\varepsilon_i$
+\item What if this model is \emph{misspecified}? I.e. what if $Y_i=\alpha+\beta_i D_i+\varepsilon_i$ ?
 \end{itemize}\medskip\pause{}
 Intuitively, different ``research designs'' (e.g. instruments) may capture different effects of the same treatment --- even when all are valid\smallskip
 \begin{itemize}
@@ -70,7 +70,7 @@ Imbens and Angrist showed that under these assumptions:
 \end{align*}
 \vspace{-0.6cm}
 
-The IV estimand identifies a LATE: the average treatment effect $Y_i(1)-Y_i(0)$ among \emph{compliers}: those with $1=D_i(1)>D_i(0)=0$\smallskip\pause{}
+The IV estimand $\beta^{IV}$ identifies a LATE: the average treatment effect $Y_i(1)-Y_i(0)$ among \emph{compliers}: those with $1=D_i(1)>D_i(0)=0$\smallskip\pause{}
 \begin{itemize}
 \item Intuitively, IV can't tell us anything about the treatment effects of \emph{never-takers} $D_i(1)=D_i(0)=0$ / \emph{always-takers} $D_i(1)=D_i(0)=1$]\smallskip\pause{}
 \item Monotonicity rules out the presence of \emph{defiers}, with $D_i(1)<D_i(0)$\pause{}
@@ -215,7 +215,7 @@ A fascinating recent literature considers intermediate cases of Imbens-Angrist a
 \item Discrete (binary/multivalued) $Z_i$, with parametric/shape restrictions to trace out (or maybe bound) the MTE curve\smallskip
 \item Effectively using a model to ``extrapolate'' from local variation, maybe to identify more policy-relevant parameters
 \end{itemize}\medskip\pause{}
-Some examples: Brinch et al. (2017),  Mogstad et al. (2018), Kline and Walters (2019), Hull (2020), Arnold et al. (2021), Kowalski (2022)\smallskip
+Some examples: Brinch et al. (2017),  Mogstad et al. (2018), Kline and Walters (2019), Hull (2020), Arnold et al. (2021), Kowalski (2022)...\smallskip
 \begin{itemize}
 \item Lots more to do here (especially on the practical side)
 \end{itemize}

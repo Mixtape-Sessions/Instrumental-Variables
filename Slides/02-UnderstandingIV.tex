@@ -90,11 +90,11 @@ One sure-fire way to ensure that $Z_i$ is as-good-as-randomly assigned is... \pa
 
   \item We still need to worry about violations of the exclusion restriction
 
-  \item Relevance holds when $Z_i$ has some effect on $X_i$
+  \item Relevance holds when $Z_i$ has some effect on $D_i$
 \end{itemize}\pause
 \medskip
 
-``Gold standard'' IV: a randomized offer to participate in a program, with $X_i$ recording program participation
+``Gold standard'' IV: a randomized offer to participate in a program, with $D_i$ recording program participation
 \begin{itemize}
   \item Exclusion restriction likely to hold for any $Y_i$, by construction
 
@@ -115,9 +115,9 @@ Abdulkadiroglu et al. (2016) are interested in whether going to a ``charter'' mi
 \begin{frame}{Example}{Charter School Lotteries}
 We leverage an institutional feature of charters: \emph{admission lotteries}
 \begin{itemize}
-  \item When more kids want to enroll than there are seats, admission offers $Z_i\in\{0,1\}$ are effectively drawn from a hat
+  \item When more kids want to enroll than there are seats, admission offers $Z_i\in\{0,1\}$ are effectively drawn from a hat\pause{}
 
-  \item Offers plausibly only affect later test scores $Y_i$ by changing charter enrollment $D_i\in\{0,1\}$, so are plausibly valid instruments
+  \item Offers plausibly only affect later test scores $Y_i$ by changing charter enrollment $D_i\in\{0,1\}$, so are plausibly valid instruments\pause{}
 
   \item We need to control for lottery fixed effects (``risk sets'') to make $Z_i$ as-good-as-randomly assigned -- more on this soon
 \end{itemize}
@@ -191,7 +191,7 @@ We might also combine IV + difference-in-differences identification
 \end{frame}
 
 \begin{frame}{Example}{Charter School Takeovers}
-Abdulkadiroglu et al. (2016) complement their lottery analysis of takeover charters with an instrumented diff-in-diff analysis
+In Abdulkadiroglu et al. (2016), we complement the lottery analysis of takeover charters with an instrumented diff-in-diff analysis
 \begin{itemize}
   \item Students enrolled in the ``legacy'' public school were eligible for being ``grandfathered'' into UP, without having to apply to the charter
 
@@ -228,7 +228,7 @@ Tthe Stata \code{ivregress}/\code{ivreg2} commands (or \code{fixes::feols} in R)
 
 \begin{align*}
 Y_i &=  \beta D_i +\mathbf{W}_i^\prime\boldsymbol{\gamma} +  \varepsilon_i\hspace{0.2cm}\text{(second stage)}\\
-X_i &= \pi Z_i + \mathbf{W}_i^\prime\boldsymbol{\mu} + \eta_i\hspace{0.2cm}\text{(first stage)}
+D_i &= \pi Z_i + \mathbf{W}_i^\prime\boldsymbol{\mu} + \eta_i\hspace{0.2cm}\text{(first stage)}
 \end{align*}
 where $\mathbf{W}_i$ includes a constant.
 \end{frame}
@@ -255,7 +255,7 @@ Sometimes we have more than one instrument $Z_{i\ell}$, for $\ell=1,\dots,L$. Th
 \vspace{-1cm}
 \begin{align*}
 Y_i &=  \beta D_i +\mathbf{W}_i^\prime\boldsymbol{\gamma} +  \varepsilon_i\hspace{0.2cm}\text{(second stage)}\\
-X_i &= \mathbf{Z}_i^\prime\boldsymbol{\pi} + \mathbf{W}_i^\prime\boldsymbol{\mu} + \eta_i\hspace{0.2cm}\text{(first stage)}
+D_i &= \mathbf{Z}_i^\prime\boldsymbol{\pi} + \mathbf{W}_i^\prime\boldsymbol{\mu} + \eta_i\hspace{0.2cm}\text{(first stage)}
 \end{align*}
 where $\mathbf{Z}_i=[Z_{i1},\dots,Z_{iL}]^\prime$. Reduced form: $Y_i= \mathbf{Z}_i^\prime\boldsymbol{\rho} + \mathbf{W}_i^\prime\boldsymbol{\kappa}+\nu_i $\pause
 
@@ -316,7 +316,7 @@ Just let Stata/R do everything for you...
 
 \section{Weak and Many Instruments}
 
-\subsection{Weak IV}
+\subsection{Weak IVs}
 \begin{frame}{Weak Instruments}
 \vspace{-0.2cm}
 
@@ -373,10 +373,10 @@ Monte Carlo: $Y_i=\varepsilon_i$, $D_i=\Pi Z_i+\eta_i$: $\Pi=0.01$ (Very Weak)
 
 A more pernicious problem is many-instrument bias, when overid\smallskip
 \begin{itemize}
-  \item Also tends to manifest in low first-stage F's, so also good to check
+\item Also tends to manifest in low first-stage F's, so also good to check
 \end{itemize}\bigskip\pause{}
 
-Many-IV bias is also towards OLS, but unlike before SEs go \emph{down}\smallskip
+Many-IV bias is also towards OLS. But unlike before, the SEs go \emph{down}\smallskip
 \begin{itemize}
   \item Intuitively, a more flexible FS tends to fit $D_i$ better $\rightarrow$ more power\smallskip
   \item But we can have \emph{overfitting} with lots of $Z_i$ $\rightarrow$ essentially recreate $D_i$
@@ -390,27 +390,27 @@ As we'll see, this bias is especially relevant in judge IV designs\smallskip
 
 \end{frame}
 
-\begin{frame}{Weak and Many Instruments VIII}
+\begin{frame}{Many Instruments: Visualized}
 \vspace{-0.2cm}
-Monte Carlo: $Y_i=\varepsilon_i$, $X_i=\Pi Z_{i1}+\eta_i$: IV with one $Z_{i1}$
+Monte Carlo: $Y_i=\varepsilon_i$, $D_i=\Pi Z_{i1}+\eta_i$: IV with one $Z_{i1}$
 \begin{center}
 \includegraphics[scale=0.35]{./lecture_includes/fewz.png}
 \end{center}
 
 \end{frame}
 
-\begin{frame}{Weak and Many Instruments IX}
+\begin{frame}{Many Instruments: Visualized}
 \vspace{-0.2cm}
-Monte Carlo: $Y_i=\varepsilon_i$, $X_i=\Pi Z_{i1}+\eta_i$: IV with ten $Z_{ij}$
+Monte Carlo: $Y_i=\varepsilon_i$, $D_i=\Pi Z_{i1}+\eta_i$: IV with ten $Z_{ij}$
 \begin{center}
 \includegraphics[scale=0.35]{./lecture_includes/somez.png}
 \end{center}
 
 \end{frame}
 
-\begin{frame}{Weak and Many Instruments X}
+\begin{frame}{Many Instruments: Visualized}
 \vspace{-0.2cm}
-Monte Carlo: $Y_i=\varepsilon_i$, $X_i=\Pi Z_{i1}+\eta_i$: IV with 100 $Z_{ij}$
+Monte Carlo: $Y_i=\varepsilon_i$, $D_i=\Pi Z_{i1}+\eta_i$: IV with 100 $Z_{ij}$
 \begin{center}
 \includegraphics[scale=0.35]{./lecture_includes/manyz.png}
 \end{center}
@@ -420,6 +420,7 @@ Monte Carlo: $Y_i=\varepsilon_i$, $X_i=\Pi Z_{i1}+\eta_i$: IV with 100 $Z_{ij}$
 \begin{frame}{What to Do?}
 Check your F's after every IV regression\smallskip
 \begin{itemize}
+\item State of the art: Montiel Olea and Pflueger '15; \code{weakivtest} in Stata\smallskip
 \item Staiger-Stock rule-of-thumb ($F>10$) still seems widely held\smallskip
 \item See Lee et al. (2020) for a recent alternative approach
 \end{itemize}

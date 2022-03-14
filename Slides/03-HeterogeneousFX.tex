@@ -128,7 +128,7 @@ Computing $E[Y_i(1)\mid D_i(1)>D_i(0)]$ is surprisingly easy in the IA setup\sma
 \item Define $W_i=Y_iD_i$, and note that this new outcome has potentials with respect to $D_i$ of $W_i(1)=Y_i(1)$ and $W_i(0)=0$\smallskip\pause{}
 \item Thus IV with $W_i$ as the outcome identifies $E[W_i(1)-W_i(0)\mid D_i(1)>D_i(0)]=E[Y_i(1)\mid D_i(1)>D_i(0)]$
 \end{itemize}\medskip\pause{}
-Similar logic shows that IV with $Y_i(1-D_i)$ as the outcome and $1-D_i$ as the treatment identifies $E[Y_i(1)\mid D_i(1)>D_i(0)]$\smallskip
+Similar logic shows that IV with $Y_i(1-D_i)$ as the outcome and $1-D_i$ as the treatment identifies $E[Y_i(0)\mid D_i(1)>D_i(0)]$\smallskip
 \begin{itemize}
 \item So easy to do! And extends to covariates / multiple IVs...
 \end{itemize}

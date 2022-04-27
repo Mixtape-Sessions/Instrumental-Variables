@@ -42,16 +42,16 @@ Four one-hour lectures: from IV basics to recent topics
   \item I will try to stick to the schedule but may improvise slightly
 \end{itemize}\pause\medskip
 
-Two 75-minute coding labs, applying what we've learned
+Two 40-minute coding labs, applying what we've learned
 \begin{itemize}
-  \item I will be live-coding in Stata, but R code will also be available
-  \item Goal: demonstrate both methods \& how I think about applying them
+  \item 20 min: you seeing how far you can get on your own, or with your classmate's help (use Discord rooms!)
+  \item 20 min: me live-coding solutions in Stata (we will also post R code)
 \end{itemize}
 
 \end{frame}
 
 \begin{frame}{Schedule}
-\includegraphics[scale=0.55]{./lecture_includes/schedule.png}
+\includegraphics[scale=0.4]{./lecture_includes/schedule.png}
 \end{frame}
 
 \section{Regression Review}
@@ -119,7 +119,8 @@ Human capital theory (e.g. Becker, 1957) tells us that taking one-day IV intensi
 
 We see a sample of $Y_i$, $D_i$, and some other covariates $W_{1i},\dots,W_{Ki}$
 \begin{itemize}
-  \item We fire up Stata and type \code{reg y d w1-wk, r}. How do we interpret the output?
+  \item We fire up Stata and type \code{reg y d w*, r}
+\item How do we interpret the output?
 \end{itemize}
 
 \end{frame}
@@ -241,7 +242,7 @@ Indeed, this leads us to IV estimands (and estimators)
   \end{adjustbox}
 \end{frame}
 
-\section{Intro to IV}
+\section{Introduction to IV}
 
 \subsection{Instrument Validity and Relevance}
 \begin{frame}{Instrument Validity and Relevance}

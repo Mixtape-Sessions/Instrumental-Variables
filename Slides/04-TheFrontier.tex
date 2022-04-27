@@ -156,13 +156,13 @@ They propose tools to measure the ``importance'' of different share IVs (``Rotem
 
 \end{frame}
 
-\begin{frame}{Rotemberg Weights for Card (2009) Exposure Shares}
-\begin{center}
-\includegraphics[scale=0.28]{./lecture_includes/card_weights.png}
-\end{center}
-\vspace{-0.3cm}
-Source: Goldsmith-Pinkham et al. (2020)
-\end{frame}
+%\begin{frame}{Rotemberg Weights for Card (2009) Exposure Shares}
+%\begin{center}
+%\includegraphics[scale=0.28]{./lecture_includes/card_weights.png}
+%\end{center}
+%\vspace{-0.3cm}
+%Source: Goldsmith-Pinkham et al. (2020)
+%\end{frame}
 
 \begin{frame}{Exogenous Shocks}
 Borusyak et al. (2022) consider the shocks $\sun{g_n}$ as exogenous,  (quasi-randomly assigned + excludable), conditional on the shares\smallskip
@@ -180,60 +180,73 @@ They propose tools to test for shock exogeneity (e.g. balance/ pre-trend checks)
 \end{frame}
 
 
-\subsection{Cautions}
-\begin{frame}{Caution 1: Incomplete Shares}
-In some shift-share applications exposure weight sum $S_i=\sum_n \electricViolet{s_{in}}$ varies across observations $i$\smallskip
-\begin{itemize}
-\item E.g. in Autor et al. (2013), the total manufacturing share $S_i$ varies
-\end{itemize}\medskip\pause{}
-Borusyak et al. (2022) show this can be a problem if you only want to leverage variation in the shocks and not also in $S_i$ \smallskip
-\begin{itemize}
-\item Intuitively, if $E[\sun{g_n}|s]=\mu$ then $E[Z_i|s]=E\left[\sum_n \electricViolet{s_{in}}\sun{g_n}|s\right]=\mu S_i$, so the ``expected instrument'' varies non-randomly across observations\smallskip
-\item If $S_i$ is correlated with $\varepsilon_i$, this non-random variation can create bias
-\end{itemize}
-\end{frame}
+%\subsection{Cautions}
+%\begin{frame}{Caution 1: Incomplete Shares}
+%In some shift-share applications exposure weight sum $S_i=\sum_n \electricViolet{s_{in}}$ varies across observations $i$\smallskip
+%\begin{itemize}
+%\item E.g. in Autor et al. (2013), the total manufacturing share $S_i$ varies
+%\end{itemize}\medskip\pause{}
+%Borusyak et al. (2022) show this can be a problem if you only want to leverage variation in the shocks and not also in $S_i$ \smallskip
+%\begin{itemize}
+%\item Intuitively, if $E[\sun{g_n}|s]=\mu$ then $E[Z_i|s]=E\left[\sum_n \electricViolet{s_{in}}\sun{g_n}|s\right]=\mu S_i$, so the ``expected instrument'' varies non-randomly across observations\smallskip
+%\item If $S_i$ is correlated with $\varepsilon_i$, this non-random variation can create bias
+%\end{itemize}
+%\end{frame}
 
-\begin{frame}{Addressing Incomplete Shares}
-An easy fix to incomplete shares is to control for $S_i=\sum_n \electricViolet{s_{in}}$\smallskip
-\begin{itemize}
-\item Alternatively, construct shares such that $S_i=1$ for everyone\smallskip
-\item The former may be more powerful if $X_i=\sum_n \electricViolet{s_{in}} \tilde{g}_{in}$ for $S_i\neq 1$
-\end{itemize}\medskip\pause{}
-If other controls are needed to make the shocks as-good-as- random (e.g. time dummies, to isolate within-period variation) then $S_i$ needs to be added as an \emph{interaction} with them\smallskip
-\begin{itemize}
-\item In Autor et al. (2013), this means interacting the manufacturing sum-of-shares with period FE...
-\end{itemize}
-\end{frame}
+%\begin{frame}{Addressing Incomplete Shares}
+%An easy fix to incomplete shares is to control for $S_i=\sum_n \electricViolet{s_{in}}$\smallskip
+%\begin{itemize}
+%\item Alternatively, construct shares such that $S_i=1$ for everyone\smallskip
+%\item The former may be more powerful if $X_i=\sum_n \electricViolet{s_{in}} \tilde{g}_{in}$ for $S_i\neq 1$
+%\end{itemize}\medskip\pause{}
+%If other controls are needed to make the shocks as-good-as- random (e.g. time dummies, to isolate within-period variation) then $S_i$ needs to be added as an \emph{interaction} with them\smallskip
+%\begin{itemize}
+%\item In Autor et al. (2013), this means interacting the manufacturing sum-of-shares with period FE...
+%\end{itemize}
+%\end{frame}
 
-\begin{frame}{Sum-of-Share Controls in Autor et al. (2013)}
-\vspace{-0.3cm}
-\begin{center}
-\includegraphics[scale=0.4]{./lecture_includes/adh_bhj.png}
-\end{center}
-\vspace{-0.3cm}
-Source: Borusyak et al. (2022)
-\end{frame}
+%\begin{frame}{Sum-of-Share Controls in Autor et al. (2013)}
+%\vspace{-0.3cm}
+%\begin{center}
+%\includegraphics[scale=0.4]{./lecture_includes/adh_bhj.png}
+%\end{center}
+%\vspace{-0.3cm}
+%Source: Borusyak et al. (2022)
+%\end{frame}
 
-\begin{frame}{Caution 2: Exposure Clustering}
-Ad\'{a}o et al. (2019) show another problem with exogenous shocks: conventional robust/clustered SEs may be wrong \smallskip
-\begin{itemize}
-\item Intuitively, the structure of $Z_{i}=\sum_n \electricViolet{s_{in}}\sun{g_n}$ may make observations with similar $\electricViolet{s_{i1} \dots s_{in}}$ correlated, even when otherwise ``far apart''\smallskip
-\item They derive non-standard central limit theorems to account for such ``exposure clustering'' (with R/Stata code)
-\end{itemize}\medskip\pause{}
-Borusyak et al. (2022) build on this theory to propose an alternative approach: estimate the IV at the level of identifying variation (shocks)\smallskip
-\begin{itemize}
-\item Derive an equivalent regression where the $\sun{g_n}$ are used directly as the instrument for shock-level outcomes and treatments\smallskip
-\item Standard robust SEs address the exposure clustering problem
-\end{itemize}
+%\begin{frame}{Caution 2: Exposure Clustering}
+%Ad\'{a}o et al. (2019) show another problem with exogenous shocks: conventional robust/clustered SEs may be wrong \smallskip
+%\begin{itemize}
+%\item Intuitively, the structure of $Z_{i}=\sum_n \electricViolet{s_{in}}\sun{g_n}$ may make observations with similar $\electricViolet{s_{i1} \dots s_{in}}$ correlated, even when otherwise ``far apart''\smallskip
+%\item They derive non-standard central limit theorems to account for such ``exposure clustering'' (with R/Stata code)
+%\end{itemize}\medskip\pause{}
+%Borusyak et al. (2022) build on this theory to propose an alternative approach: estimate the IV at the level of identifying variation (shocks)\smallskip
+%\begin{itemize}
+%\item Derive an equivalent regression where the $\sun{g_n}$ are used directly as the instrument for shock-level outcomes and treatments\smallskip
+%\item Standard robust SEs address the exposure clustering problem
+%\end{itemize}
 
-\end{frame}
+%\end{frame}
 
-\begin{frame}{Estimating Shock-Level SSIV Regressions}
+\begin{frame}{Estimating Exogenous-Shock SSIV Regressions in Stata}
 \vspace{-0.3cm}
 \begin{center}
 \includegraphics[scale=0.27]{./lecture_includes/ssaggregate.png}
 \end{center}
-Install in Stata: \code{ssc install ssaggregate}
+To install: \code{ssc install ssaggregate}
+\end{frame}
+
+\begin{frame}{Estimating Exogenous-Shock l SSIV Regressions in R}
+\vspace{-0.3cm}
+\begin{center}
+\includegraphics[scale=0.25]{./lecture_includes/ssaggregate_R.png}
+\end{center}
+\end{frame}
+
+\begin{frame}{For More on SSIV and Related Methods ... }
+\begin{center}
+\includegraphics[scale=0.4]{./lecture_includes/ssiv_plug.png}
+\end{center}
 \end{frame}
 
 \section{Other Frontiers}
@@ -268,7 +281,7 @@ My guess is these problems only get worse with IV (work to be done!)\smallskip
 
 \subsection{Recentered IV}
 \begin{frame}{Recentered IV}
-Remember the ``expected instrument'' in shift-share IV? It turns out the incomplete shares problem may generalize to related settings\smallskip
+Often we're interested in using instruments that combine multiple sources of variation, only some of which is random \smallskip
 \begin{itemize}
 \item Network spillover IVs (e.g. Miguel and Kremer 2004)\smallskip
 \item Transportation upgrade IVs (e.g. Donaldson and Hornbeck 2016)\smallskip
@@ -276,7 +289,7 @@ Remember the ``expected instrument'' in shift-share IV? It turns out the incompl
 \item Nonlinear shift-share (e.g. Chodorow-Reich and Wieland 2020)
 \end{itemize}\bigskip\pause{}
 
-Borusyak and Hull (2021) develop a general identification framework for IVs combining multiple sources of variation, w/only some random\smallskip
+Borusyak and Hull (2021) develop a general identification framework\smallskip
 \begin{itemize}
 \item Propose ``recentering'' to avoid bias from non-random ``exposure''
 \end{itemize}

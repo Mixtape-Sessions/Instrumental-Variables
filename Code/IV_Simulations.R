@@ -49,7 +49,7 @@ results_weak <- purrr::map_dfr(1:2000, \(i) {
 
 
 	return(data.table(
-		name = c("Strong", "Weaker", "Weakest",),
+		name = c("Strong", "Weaker", "Weakest"),
 		est  = c(
 			coef(est_strong)[["fit_x"]],
 			coef(est_weaker)[["fit_x"]],

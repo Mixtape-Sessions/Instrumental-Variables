@@ -4,12 +4,18 @@
 /****************************************/
 
 /* Install any needed packages */
-cap ssc install ranktest
-cap ssc install ivreg2
+* cap ssc install ranktest
+* cap ssc install ivreg2
+
+* To install jive: 
+* -findit jive-
+
+* To install manyiv from local file:
+* type -sysdir-, and copy all the manyiv files into PERSONAL folder
 
 /* Setup data */
 clear all
-use ../../Data/stevenson, clear
+use "https://github.com/Mixtape-Sessions/Instrumental-Variables/blob/main/Data/stevenson.dta?raw=true", clear
 keep if black==1
 
 /* Get dummy IV */

@@ -1,19 +1,17 @@
-<img src="img/banner.png" alt="Mixtape Sessions Banner" width="100%"> 
-<br/>
+<img src="https://raw.githubusercontent.com/Mixtape-Sessions/Instrumental-Variables/main/img/banner.png" alt="Mixtape Sessions Banner" width="100%"> 
 
-<img src="img/readme_about.png" alt="About" width="100%">
-<br/>
+
+## About
 
 Instrumental variables (IV) is a powerful tool for leveraging external (“exogenous”) variation to estimate the causal effects of otherwise confounded (“endogenous”) variables. This one-day workshop will introduce the basics of IV through different practical examples, formalize the requirements of a valid and powerful IV, and discuss the mechanics of the two-stage least squares (2SLS) estimator. Special focus will be paid on interpreting linear IV under heterogeneous treatment effects and recent advances in judge leniency designs, shift-share IV, and more. The course will include substantial group programming exercises, where different IV techniques will be illustrated in real-world applications. 
-<br/>
 
-<br/><br/>
-<img src="img/readme_schedule.png" alt="Schedule" width="100%"> 
-<br/>
 
-<details><summary><b>Introduction</b></summary><br/>
 
-<b>About</b>
+## Schedule
+
+### Introduction
+
+#### About
 
 - Introduction
 
@@ -25,11 +23,11 @@ Instrumental variables (IV) is a powerful tool for leveraging external (“exoge
   - Instrument Validity and Relevance
   - The 2SLS Estimator
 
-<b>Slides</b>
+#### Slides
 
 <a href="https://raw.githubusercontent.com/Mixtape-Sessions/Instrumental-Variables/main/Slides/01-Introduction.pdf">Introduction</a>
 
-<b>Readings</b>
+#### Readings
 
 <a href="https://raw.githubusercontent.com/Mixtape-Sessions/Instrumental-Variables/main/Readings/Lecture1/Angrist_1990.pdf">Angrist (1990)</a>
 
@@ -37,13 +35,13 @@ Instrumental variables (IV) is a powerful tool for leveraging external (“exoge
 
 <a href="https://raw.githubusercontent.com/Mixtape-Sessions/Instrumental-Variables/main/Readings/Lecture1/PH1630_Chapter8_Notes.pdf">My Lecture Notes</a>
 
-</details><br />
 
 
 
-<details><summary><b>Understanding IV</b></summary><br/>
 
-<b>About</b>
+### Understanding IV
+
+#### About
 
 - Where do (Good) Instruments Come From?
   - True Lotteries
@@ -58,11 +56,11 @@ Instrumental variables (IV) is a powerful tool for leveraging external (“exoge
   - Weak IV
   - Many IVs
 
-<b>Slides</b>
+#### Slides
 
 <a href="https://raw.githubusercontent.com/Mixtape-Sessions/Instrumental-Variables/main/Slides/02-UnderstandingIV.pdf">Understanding IV</a>
 
-<b>Readings</b>
+#### Readings
 
 <a href="https://raw.githubusercontent.com/Mixtape-Sessions/Instrumental-Variables/main/Readings/Lecture2/Angrist_Imbens_Krueger_1999.pdf">Angrist, Imbens, and Krueger (1999)</a>
 
@@ -95,11 +93,11 @@ Instrumental variables (IV) is a powerful tool for leveraging external (“exoge
 <a href="https://raw.githubusercontent.com/Mixtape-Sessions/Instrumental-Variables/main/Readings/Lecture2/Abdulkadiroglu_Angrist_Hull_Pathak_2016.pdf">Abdulkadiroglu, Angrist, Hull, Pathak (2016)</a>
 
 
-</details><br />
 
-<details><summary><b>Heterogeneous Effects</b></summary><br/>
 
-<b>About</b>
+### Heterogeneous Effects
+
+#### About
 
 - The LATE Theorem
   - Potential Outcomes Setup
@@ -114,11 +112,11 @@ Instrumental variables (IV) is a powerful tool for leveraging external (“exoge
   - Discrete Instruments
 
 
-<b>Slides</b>
+#### Slides
 
 <a href="https://raw.githubusercontent.com/Mixtape-Sessions/Instrumental-Variables/main/Slides/03-HeterogeneousFX.pdf">Heterogeneous Effects</a>
 
-<b>Readings</b>
+#### Readings
 
 <a href="https://raw.githubusercontent.com/Mixtape-Sessions/Instrumental-Variables/main/Readings/Lecture3/Abadie_2002.pdf">Abadie (2002)</a>
 
@@ -168,11 +166,11 @@ Instrumental variables (IV) is a powerful tool for leveraging external (“exoge
 
 <a href="https://raw.githubusercontent.com/Mixtape-Sessions/Instrumental-Variables/main/Readings/Lecture3/Vytlacil_2002.pdf">Vytlacil (2002)</a>
 
-</details><br />
 
-<details><summary><b>IV Frontiers</b></summary><br/>
 
-<b>About</b>
+### IV Frontiers
+
+#### About
 
 - Judge/Examiner IV
   - Approach
@@ -186,11 +184,11 @@ Instrumental variables (IV) is a powerful tool for leveraging external (“exoge
   - Diff-in-diff IV
   - Recentered IV
 
-<b>Slides</b>
+#### Slides
 
 <a href="https://raw.githubusercontent.com/Mixtape-Sessions/Instrumental-Variables/main/Slides/04-TheFrontier.pdf">IV Frontiers</a>
 
-<b>Readings</b>
+#### Readings
 
 <a href="https://raw.githubusercontent.com/Mixtape-Sessions/Instrumental-Variables/main/Readings/Lecture4/Adao_Kolesar_Morales_2019.pdf">Adao, Kolesar, and Morales (2019)</a>
 
@@ -206,16 +204,16 @@ Instrumental variables (IV) is a powerful tool for leveraging external (“exoge
 
 <a href="https://raw.githubusercontent.com/Mixtape-Sessions/Instrumental-Variables/main/Readings/Lecture4/Kolesar_2013.pdf">Kolesar (2013)</a>
 
-</details><br />
 
-<details><summary><b>Conclusion</b></summary><br/>
 
-<b>About</b>
+### Conclusion
+
+#### About
 
 This is a short lecture concluding the Mixtape Session. Thanks for coming!
 
-<b>Slides</b>
+#### Slides
 
 <a href="https://raw.githubusercontent.com/Mixtape-Sessions/Instrumental-Variables/main/Slides/05-Conclusion.pdf">IV Frontiers</a>
 
-</details><br />
+

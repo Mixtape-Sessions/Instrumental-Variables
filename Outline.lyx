@@ -1,16 +1,21 @@
-#LyX 2.3 created this file. For more info see http://www.lyx.org/
-\lyxformat 544
+#LyX 2.4 created this file. For more info see https://www.lyx.org/
+\lyxformat 620
 \begin_document
 \begin_header
 \save_transient_properties true
 \origin unavailable
 \textclass article
+\begin_preamble
+% Added by lyx2lyx
+\setlength{\parskip}{\bigskipamount}
+\setlength{\parindent}{0pt}
+\end_preamble
 \use_default_options true
-\maintain_unincluded_children false
+\maintain_unincluded_children no
 \language english
 \language_package default
-\inputencoding auto
-\fontencoding global
+\inputencoding auto-legacy
+\fontencoding auto
 \font_roman "lmodern" "default"
 \font_sans "default" "default"
 \font_typewriter "default" "default"
@@ -18,7 +23,9 @@
 \font_default_family default
 \use_non_tex_fonts false
 \font_sc false
-\font_osf false
+\font_roman_osf false
+\font_sans_osf false
+\font_typewriter_osf false
 \font_sf_scale 100 100
 \font_tt_scale 100 100
 \use_microtype false
@@ -61,7 +68,9 @@
 \suppress_date false
 \justification true
 \use_refstyle 1
+\use_formatted_ref 0
 \use_minted 0
+\use_lineno 0
 \index Index
 \shortcut idx
 \color #008000
@@ -72,8 +81,8 @@
 \bottommargin 0.8in
 \secnumdepth 3
 \tocdepth 3
-\paragraph_separation skip
-\defskip bigskip
+\paragraph_separation indent
+\paragraph_indentation default
 \is_math_indent 0
 \math_numbering_side default
 \quotes_style english
@@ -81,11 +90,16 @@
 \papercolumns 1
 \papersides 1
 \paperpagestyle default
+\tablestyle default
 \tracking_changes false
 \output_changes false
+\change_bars false
+\postpone_fragile_content false
 \html_math_output 0
 \html_css_as_file 0
 \html_be_strict false
+\docbook_table_output 0
+\docbook_mathml_prefix 1
 \end_header
 
 \begin_body
@@ -98,7 +112,8 @@
 
 
 \bar under
-Instrumental Variables Methods: A Two-Day Workshop
+Instrumental Variables Methods:
+ A Two-Day Workshop
 \bar default
 
 \begin_inset space \hfill{}
@@ -114,7 +129,7 @@ Instrumental Variables Methods: A Two-Day Workshop
 
 
 \begin_inset Tabular
-<lyxtabular version="3" rows="4" columns="2">
+<lyxtabular version="3" rows="3" columns="2">
 <features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
@@ -199,36 +214,6 @@ literal "false"
 \end_inset
 </cell>
 </row>
-<row>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Twitter:
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\bar under
-\begin_inset CommandInset href
-LatexCommand href
-name "@instrumenthull"
-target "https://twitter.com/instrumenthull"
-literal "false"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
 </lyxtabular>
 
 \end_inset
@@ -251,15 +236,20 @@ exogenous
 \begin_inset Quotes erd
 \end_inset
 
-) variation to estimate the causal effects of otherwise confounded (“endogenous”
-) variables.
- This two-day workshop will introduce the basics of IV through different
- practical examples, formalize the requirements of a valid and powerful
- IV, and discuss the mechanics of the two-stage least squares (2SLS) estimator.
- Special focus will be paid on interpreting linear IV under heterogeneous
- treatment effects and recent advances in leniency IV designs The course
- will include substantial group programming exercises, where different IV
- techniques will be illustrated in real-world applications.
+) variation to estimate the causal effects of otherwise confounded (“endogenous”) variables.
+ This two-day workshop will introduce the basics of IV through different practical examples,
+ formalize the requirements of a valid and powerful IV,
+ and discuss the mechanics of the two-stage least squares (2SLS) estimator.
+ Special focus will be paid on interpreting linear IV under heterogeneous treatment effects and recent advances with 
+\begin_inset Quotes eld
+\end_inset
+
+formula
+\begin_inset Quotes erd
+\end_inset
+
+ instruments.
+ The course includes a programming exercise where IV techniques are illustrated in a real-world application.
  
 \end_layout
 
@@ -270,35 +260,39 @@ About the Instructor
 \end_layout
 
 \begin_layout Standard
-Peter Hull is the Groos Family Assistant Professor of Economics at Brown
- Univeristy and a Faculty Research Fellow at the National Bureau of Economic
- Research.
- He has published papers on topics in applied econometrics, education, healthcar
-e, and criminal justice, in outlets such as the 
+Peter Hull is a Professor of Economics at Brown University and a Research Associate at the National Bureau of Economic Research.
+ He has published papers on topics in applied econometrics,
+ education,
+ healthcare,
+ and criminal justice,
+ in outlets such as the 
 \emph on
 American Economic Review
 \emph default
-, the 
+,
+ the 
 \emph on
 Quarterly Journal of Economics
 \emph default
-, the 
+,
+ the 
 \emph on
 Review of Economic Studies
 \emph default
-, and the 
+,
+ and the 
 \emph on
 New England Journal of Medicine
 \emph default
 .
- His research is focused on developing and applying new instrumental variable
- methods to measure the quality of institutions, such as schools or hospitals,
+ His research is focused on developing and applying new instrumental variable methods to measure the quality of institutions,
+ such as schools or hospitals,
  as well as discrimination and bias in human and algorithmic decision-making.
- Prior to Brown, Professor Hull taught at the Kenneth C.
- Griffin Department of Economics at the University of Chicago and worked
- at Microsoft Research and the Federal Reserve Bank of New York.
- He earned his PhD in economics from MIT in 2017, under 2021 Nobel Laureate
- Josh Angrist.
+ Prior to Brown,
+ Professor Hull taught at the Kenneth C.
+ Griffin Department of Economics at the University of Chicago and worked at Microsoft Research and the Federal Reserve Bank of New York.
+ He earned his PhD in economics from MIT in 2017,
+ under 2021 Nobel Laureate Josh Angrist.
  
 \end_layout
 
@@ -309,14 +303,13 @@ Course Objectives
 \end_layout
 
 \begin_layout Standard
-This course is appropriate for students familiar with core causal inference
- tools (e.g.
+This course is appropriate for students familiar with core causal inference tools (e.g.
  potential outcomes and/or causal graphs) and the basics of linear regression.
- The course will cover core topics on IV and 2SLS as well as more recent
- methodological advances; we will focus on applications and practical issues
- in the two coding labs.
- Students should be familiar with either Stata, R, or Python to complete
- these labs.
+ The course will cover core topics on IV and 2SLS as well as more recent methodological advances;
+ we will focus on applications and practical issues in the coding lab.
+ Students should be familiar with either Stata,
+ R,
+ or Python to complete these labs.
 \end_layout
 
 \begin_layout Standard
@@ -326,11 +319,9 @@ Course Structure
 \end_layout
 
 \begin_layout Standard
-This is a two-day (6 hour) intensive workshop, with four hours of lectures
- and two 40-minute coding labs.
- The remaining time will be given to breaks.
- The coding labs will involve 20 minutes of self- or group-paced work and
- 20 minutes of solution live-coding.
+This is a two-day intensive workshop,
+ with five hours of lectures and a take-home coding lab.
+ The remaining time will be given to breaks and 20 minutes of live-coding solutions to the coding lab.
 \end_layout
 
 \begin_layout Standard
@@ -341,7 +332,7 @@ Schedule
 
 \begin_layout Standard
 \begin_inset Tabular
-<lyxtabular version="3" rows="12" columns="3">
+<lyxtabular version="3" rows="8" columns="3">
 <features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
@@ -351,7 +342,7 @@ Schedule
 \begin_inset Text
 
 \begin_layout Plain Layout
-Tuesday 9/27
+Tuesday 2/10
 \end_layout
 
 \end_inset
@@ -360,7 +351,7 @@ Tuesday 9/27
 \begin_inset Text
 
 \begin_layout Plain Layout
-6:00-7:00pm
+6:00-7:20pm
 \end_layout
 
 \end_inset
@@ -369,7 +360,8 @@ Tuesday 9/27
 \begin_inset Text
 
 \begin_layout Plain Layout
-Lecture 1: Regression Review; Regression Endogeneity; Introduction to IV
+Lecture 1:
+ Introduction / IV Mechanics
 \end_layout
 
 \end_inset
@@ -389,7 +381,7 @@ Lecture 1: Regression Review; Regression Endogeneity; Introduction to IV
 \begin_inset Text
 
 \begin_layout Plain Layout
-7:00-7:10pm
+7:20-7:35pm
 \end_layout
 
 \end_inset
@@ -420,7 +412,7 @@ Break
 \begin_inset Text
 
 \begin_layout Plain Layout
-7:10-8:10pm
+7:35-9:00pm
 \end_layout
 
 \end_inset
@@ -429,7 +421,8 @@ Break
 \begin_inset Text
 
 \begin_layout Plain Layout
-Lecture 2: Understanding Instrument Validity; 2SLS Mechanics; Applications
+Lecture 2:
+ IV Interpretation (Part 1)
 \end_layout
 
 \end_inset
@@ -449,7 +442,95 @@ Lecture 2: Understanding Instrument Validity; 2SLS Mechanics; Applications
 \begin_inset Text
 
 \begin_layout Plain Layout
-8:10-8:20pm
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Wednesday 2/12
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6:00-6:30pm
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Coding Lab
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6:30-7:20pm
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Lecture 2:
+ IV Interpretation (Part 2)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7:20-7:35pm
 \end_layout
 
 \end_inset
@@ -480,7 +561,7 @@ Break
 \begin_inset Text
 
 \begin_layout Plain Layout
-8:20-9:00pm
+7:35-9:00pm
 \end_layout
 
 \end_inset
@@ -489,214 +570,8 @@ Break
 \begin_inset Text
 
 \begin_layout Plain Layout
-Coding Lab 1: Angrist and Krueger (1991)
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Wednesday 9/28
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-6:00-7:00pm
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Lecture 3: Heterogeneous Treatment Effects; Characterizing Compliers; MTEs
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-7:00-7:10pm
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\emph on
-Break
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-7:10-8:10pm
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Lecture 4: Judge Leniency Designs; Shift-Share IV; New IV Frontiers
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-8:10-8:20pm
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\emph on
-Break
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-8:20-9:00pm
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Coding Lab 2: Stevenson (2018)
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-9:00-9:15pm
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Closing Remarks
+Lecture 3:
+ Formula Instruments
 \end_layout
 
 \end_inset

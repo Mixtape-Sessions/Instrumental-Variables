@@ -216,4 +216,3 @@ This is a short lecture concluding the Mixtape Session. Thanks for coming!
 
 <a href="https://raw.githubusercontent.com/Mixtape-Sessions/Instrumental-Variables/main/Slides/05-Conclusion.pdf">IV Frontiers</a>
 
-
